@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 /*Route::get('/', function () {
     return view('welcome');
-});
-*/
-//Route::group(['middleware'=> 'web'], function(){
+});*/
+
+/*Route::group(['middleware'=> 'web'], function(){
     
-//});
+});*/
 
 Route::get('/', 'App\Http\Controllers\UserController@getLogin')->name('login');
 Route::get('/dashboard', 'App\Http\Controllers\UserController@dashboard')->name('dashboard');
