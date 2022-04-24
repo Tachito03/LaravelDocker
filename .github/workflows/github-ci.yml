@@ -27,6 +27,9 @@ jobs:
       
       - name: Install Composer dependencies 
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      
+      - name: Generate Key
+        run: php artisan key:generate 
 
       - name: Create deployment artifact
         env:
@@ -143,6 +146,7 @@ jobs:
             ln -s -f $STORAGE_PATH $RELEASE_PATH
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             service php8.0-fpm reload
+      
 
 
               
