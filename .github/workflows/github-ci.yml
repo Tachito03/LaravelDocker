@@ -144,14 +144,6 @@ jobs:
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             service php8.0-fpm reload
       
-      - name: Generate Key
-        run: php artisan key:generate 
-      
-      - name: Clear Config
-        run: php artisan config:clear
-        
-      - name: Run Migration
-        run: php artisan migrate --force 
 
 
               
