@@ -86,6 +86,7 @@ jobs:
             rm -rf ${{ matrix.server.path }}/releases/${GITHUB_SHA}/storage
             mkdir -p ${{ matrix.server.path }}/storage/{app,public,framework,logs}
             mkdir -p ${{ matrix.server.path }}/storage/framework/{cache,sessions,testing,views}
+            mkdir -p ${{ matrix.server.path }}/storage/framework/cache
             chmod -R 777 ${{ matrix.server.path }}/storage/
             
 
