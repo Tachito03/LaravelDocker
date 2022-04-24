@@ -139,7 +139,6 @@ jobs:
             printf "%s" "$LARAVEL_ENV" > "${BASE_PATH}/.env"
             ln -s -f ${BASE_PATH}/.env $RELEASE_PATH
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
-
             service php8.0-fpm reload
 
 
