@@ -3,7 +3,10 @@ name: Deploy App
 on:
   push:
     branches:
-      - master
+      - dev
+  pull_request:
+    branches:
+      -master
 
 jobs:
   create-deployment-artifacts:
@@ -187,8 +190,8 @@ jobs:
           port: ${{ matrix.server.port }}
           envs: RELEASES_PATH,ARTIFACTS_PATH
           script: |
-            cd $RELEASES_PATH && ls -t -l | tail -n +6 | xargs rm -rf
-            cd $ARTIFACTS_PATH && ls -t -l | tail -n +6 | xargs rm -rf
+            cd $RELEASES_PATH && ls -t -l | tail -n +6 | xargs -0 -r rm -rf
+            cd $ARTIFACTS_PATH && ls -t -l | tail -n +6 | xargs -0 -r rm -rf
       
 
 
