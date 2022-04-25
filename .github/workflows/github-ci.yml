@@ -78,4 +78,6 @@ jobs:
          host: ${{ secrets.SSH_HOST }}
          key: ${{ secrets.SSH_KEY }}
          username: ${{ secrets.SSH_USERNAME }}
-         script: cd /var/www/html
+         script: |
+          cd /var/www/html
+          git clone https://github.com/Tachito03/LaravelDocker.git
