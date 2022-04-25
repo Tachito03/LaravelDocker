@@ -3,7 +3,7 @@ name: ci/cd workflow
 on:
   push:
     branches:
-     - dev
+     - master
      - features/*
   pull_request:
  
