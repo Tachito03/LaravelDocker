@@ -4,6 +4,7 @@ on:
   push:
     branches:
      - master
+     - dev
   pull_request:
  
 jobs:
@@ -80,4 +81,4 @@ jobs:
          FOLDER: "./"
          SERVER_IP: ${{ secrets.HOST }}
          USERNAME: ${{ secrets.USERNAME }}
-         SERVER_DESTINATION: "/var/www/html/current"
+         SERVER_DESTINATION: "/var/www/html/"
