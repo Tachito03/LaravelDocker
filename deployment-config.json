@@ -5,7 +5,7 @@
         "username": "root",
         "password": "Droplet&Perti22dev",
         "port": "22",
-        "beforeHooks": "cd ${RELEASE_PATH} | php artisan key:generate | php artisan migrate",
+        "beforeHooks": "cd ${RELEASE_PATH} && php artisan key:generate && php artisan migrate",
         "afterHooks": "",
         "path": "/var/www/html"
     }
