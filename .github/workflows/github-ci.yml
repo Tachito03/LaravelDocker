@@ -79,7 +79,7 @@ jobs:
          KEY: ${{ secrets.SSH_KEY }}
          USERNAME: ${{ secrets.SSH_USERNAME }}         
        with: 
-         source: "/*"
+         source: "."
          target: "/var/www/html"
          strip_components: 1
         
