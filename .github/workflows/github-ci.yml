@@ -73,7 +73,6 @@ jobs:
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
  
      - name: Deploy
-     - uses: actions/checkout@master
        uses: appleboy/scp-action@master
        env:
          host: ${{ secrets.SSH_HOST }}
