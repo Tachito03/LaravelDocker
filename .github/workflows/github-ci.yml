@@ -3,10 +3,7 @@ name: Deploy App
 on:
   push:
     branches:
-      - dev
-  pull_request:
-    branches:
-      -master
+     - master
 
 jobs:
   create-deployment-artifacts:
@@ -91,7 +88,6 @@ jobs:
             mkdir -p ${{ matrix.server.path }}/storage/framework/{cache,sessions,testing,views}
             mkdir -p ${{ matrix.server.path }}/storage/framework/cache
             chmod -R 777 ${{ matrix.server.path }}/storage/
-            
 
   run-before-hooks:
     name: "${{ matrix.server-name}}: Before hook"
