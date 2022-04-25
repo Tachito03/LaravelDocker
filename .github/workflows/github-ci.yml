@@ -187,7 +187,7 @@ jobs:
           port: ${{ matrix.server.port }}
           envs: RELEASES_PATH,ARTIFACTS_PATH
           script: |
-            cd $RELEASE_PATH && ls -t -l | tail -n +6 | xargs rm -rf
+            cd $RELEASES_PATH && ls -t -l | tail -n +6 | xargs rm -rf
             cd $ARTIFACTS_PATH && ls -t -l | tail -n +6 | xargs rm -rf
       
 
