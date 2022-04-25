@@ -146,7 +146,7 @@ jobs:
   run-after-hooks:
     name: "${{ matrix.server-name}}: After hook"
     runs-on: ubuntu-latest
-    needs: [create-deployment-artifacts, prepare-release-on-servers, activate-release]
+    needs: [create-deployment-artifacts, prepare-release-on-servers, activate-releases]
     strategy:
       matrix:
         server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
