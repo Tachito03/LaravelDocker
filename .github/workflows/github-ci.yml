@@ -79,8 +79,8 @@ jobs:
        uses: shivammathur/setup-php@v2
        with:
          php-version: 8.0
-         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
-         coverage: none
+         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, pdo_mysql, gd, json, intl
+         coverage: none 
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
@@ -120,7 +120,7 @@ jobs:
         DB_DATABASE: laravel_test
         DB_PORT: 3306
         DB_USER: root
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        #DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
        run: | 
         php artisan config:cache
         php artisan config:clear
@@ -128,7 +128,7 @@ jobs:
         php artisan route:clear
         php artisan cache:clear
         php artisan optimize
-        php artisan migrate --force
+        php artisan migrate 
 
  #deploy-production:
    #runs-on: ubuntu-latest
