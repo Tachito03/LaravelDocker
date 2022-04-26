@@ -47,8 +47,8 @@ jobs:
  deploy-development:
    runs-on: ubuntu-latest
    needs: tests-laravel
-   #if: github.ref == 'refs/heads/dev'
-   if: github.event_name != 'pull_request'
+   if: github.ref == 'refs/heads/dev'
+   #if: github.event_name != 'pull_request'
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -83,12 +83,11 @@ jobs:
          USERNAME: ${{ secrets.SSH_USERNAME }}         
        with: 
          source: "."
-         target: "/var/www/html"
+         target: "/var/www/dev"
          strip_components: 1
          script: |
-          cd var/www/html
-          chmod -R 777 storage/*
-          chmod -R 777 bootstrap/cache
+          chmod -R 777 /var/dev/storage/*
+          chmod -R 777 /var/dev/bootstrap/cache
 
      - name: Clean cache
        run: | 
@@ -139,9 +138,8 @@ jobs:
          target: "/var/www/html"
          strip_components: 1
          script: |
-          cd var/www/html
-          chmod -R 777 storage/*
-          chmod -R 777 bootstrap/cache
+          chmod -R 777 /var/www/html/storage/*
+          chmod -R 777 /var/www/html/bootstrap/cache
 
      - name: Clean cache
        run: | 
