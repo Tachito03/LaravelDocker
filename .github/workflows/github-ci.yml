@@ -84,10 +84,10 @@ jobs:
          USERNAME: ${{ secrets.SSH_USERNAME }}         
        with: 
          source: "."
-         target: "/var/www/dev/html"
+         target: "/var/www/dev"
          strip_components: 1
          script: |
-          cd /var/www/dev/html
+          cd /var/www/dev
           chmod -R 777 storage/*
           chmod -R 777 bootstrap/cache
 
