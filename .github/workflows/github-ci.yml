@@ -83,12 +83,20 @@ jobs:
          target: "/var/www/html"
          strip_components: 1
 
-     - name: Run migration
+     - name: Execute BD 
+       env: 
+        DB_CONNECTION: mysql
+        DB_DATABASE: laravel_test
+        DB_PORT: 33306
+        DB_USER: root
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
        run: |
+        php artisan migrate
+        php artisan key:generate
         php artisan config:clear
         php artisan route:clear
         php artisan cache:clear
-        php artisan key:generate
-        php artisan migrate --force
+        
+        
         
         
