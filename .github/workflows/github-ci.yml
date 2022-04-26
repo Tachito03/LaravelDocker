@@ -85,7 +85,7 @@ jobs:
 
      - name: Run migration
        run: |
-        php key:generate
+        php artisan key:generate
         php artisan config:clear
         php artisan route:clear
         php artisan cache:clear
