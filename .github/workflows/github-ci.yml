@@ -2,20 +2,19 @@ name: ci/cd workflow
  
 on:
   push:
-    branches:
-     - master
-     - features/*
-  pull_request:
+    branches: ['*']
+  pull_request: 
+    branches: [master]
+     
  
 jobs:
- tests:
+ tests-laravel:
    runs-on: ubuntu-latest
    strategy:
      matrix:
        php: [8.0.0, 8.0.2]
  
-   name: Test - PHP ${{ matrix.php }}
- 
+   name: Prueba - PHP ${{ matrix.php }}
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -42,13 +41,15 @@ jobs:
      - name: Generate key
        run: php artisan key:generate
  
-     - name: Execute tests
+     - name: Execute php tests
        run: vendor/bin/phpunit --verbose
  
- deploy:
+ deploy-development:
    runs-on: ubuntu-latest
-   needs: tests
-   if: github.ref == 'refs/heads/master'
+   needs: tests-laravel
+   #if: github.ref == 'refs/heads/dev'
+   if: github.event_name != 'pull_request'
+   environment: dev
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -63,22 +64,95 @@ jobs:
        uses: shivammathur/setup-php@v2
        with:
          php-version: 8.0
-         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
-         coverage: none
+         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, pdo_mysql, gd, json, intl
+         coverage: none 
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
  
      - name: Copy dotenv file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
+
+     - name: Generate Key
+       run: php artisan key:generate
  
-     - name: Deploy
-       uses: AEnterprise/rsync-deploy@v1.0
+     - name: Deploy-development
+       uses: appleboy/scp-action@master
        env:
-         ARGS: '-avzh --exclude=".*"'
-         SERVER_PORT: ${{ secrets.PORT }}
-         FOLDER: "./"
-         SERVER_IP: ${{ secrets.HOST }}
-         USERNAME: ${{ secrets.USERNAME }}
-         PASSWORD: ${{ secrets.PASSWORD }}
-         SERVER_DESTINATION: "/var/www/html/current"
+         HOST: ${{ secrets.SSH_HOST }}
+         KEY: ${{ secrets.SSH_KEY }}
+         USERNAME: ${{ secrets.SSH_USERNAME }}         
+       with: 
+         source: "."
+         target: "/var/www/html"
+         strip_components: 1
+         script: |
+          cd var/www/html
+          chmod -R 777 storage/*
+          chmod -R 777 bootstrap/cache
+
+     - name: Clean cache
+       run: | 
+        php artisan config:clear
+        php artisan route:clear
+        php artisan cache:clear
+
+ deploy-production:
+   runs-on: ubuntu-latest
+   needs: [tests-laravel, deploy-development]
+   #if: github.ref == 'refs/heads/dev'
+   if: github.event_name == 'pull_request'
+   environment: production
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v2
+ 
+     - name: Cache PHP dependencies
+       uses: actions/cache@v1
+       with:
+         path: vendor
+         key: dependencies-php-composer-${{ hashFiles('**/composer.lock') }}
+ 
+     - name: Setup PHP
+       uses: shivammathur/setup-php@v2
+       with:
+         php-version: 8.0
+         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, pdo_mysql, gd, json, intl
+         coverage: none 
+ 
+     - name: Install dependencies
+       run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+ 
+     - name: Copy dotenv file
+       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
+
+     - name: Generate Key
+       run: php artisan key:generate
+ 
+     - name: Deploy-prod
+       uses: appleboy/scp-action@master
+       env:
+         HOST: ${{ secrets.SSH_HOST }}
+         KEY: ${{ secrets.SSH_KEY }}
+         USERNAME: ${{ secrets.SSH_USERNAME }}         
+       with: 
+         source: "."
+         target: "/var/www/html"
+         strip_components: 1
+         script: |
+          cd var/www/html
+          chmod -R 777 storage/*
+          chmod -R 777 bootstrap/cache
+
+     - name: Clean cache
+       run: | 
+        php artisan config:clear
+        php artisan route:clear
+        php artisan cache:clear
+
+
+        
+        
+        
+        
+        
