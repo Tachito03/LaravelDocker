@@ -1,3 +1,3 @@
 set -e
 
-chmod -R 777 storage/*
+chmod -R 0777 /var/www/html/storage/*

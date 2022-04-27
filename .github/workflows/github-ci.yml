@@ -90,7 +90,7 @@ jobs:
           #chmod -R guo+w storage
           #php artisan cache:clear
      - name: Changing Permissions
-       run: sh chmod +x  ./sh-script.sh
+       run: sh ./sh-script.sh
 
      - name: Clean cache
        run: | 
