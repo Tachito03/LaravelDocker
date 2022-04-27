@@ -137,9 +137,13 @@ jobs:
          source: "."
          target: "/var/www/html"
          strip_components: 1
-         script: |
-          sudo chmod -R 0777 ./storage/*
-          sudo chmod -R 0777 ./bootstrap/cache
+         #script: |
+          #sudo chmod -R 0777 ./storage/*
+          #sudo chmod -R 0777 ./bootstrap/cache
+     - name: Changing Permisos
+       run: |
+        sudo chmod -R 0777 /var/www/html/storage/*
+        sudo chmod -R 0777 /var/www/html/bootstrap/cache
 
      - name: Clean cache
        run: | 
