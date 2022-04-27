@@ -12,7 +12,7 @@ jobs:
    runs-on: ubuntu-latest
    strategy:
      matrix:
-       php: [8.0.0, 8.0.2]
+       php: [8.0.0]
  
    name: Prueba - PHP ${{ matrix.php }}
    steps:
@@ -122,7 +122,7 @@ jobs:
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
  
      - name: Copy dotenv file
-       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
+       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV_PROD }}');"
 
      - name: Generate Key
        run: php artisan key:generate
