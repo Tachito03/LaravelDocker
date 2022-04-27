@@ -85,12 +85,12 @@ jobs:
          source: "."
          target: "/var/www/dev"
          strip_components: 1
-         #script: |
-          #chmod -R gu+w storage
-          #chmod -R guo+w storage
-          #php artisan cache:clear
-     - name: Changing Permissions
-       run: sh ./sh-script.sh
+         script: |
+          chmod -R gu+w storage
+          chmod -R guo+w storage
+          php artisan cache:clear
+     #- name: Changing Permissions
+     #  run: sh ./sh-script.sh
 
      - name: Clean cache
        run: | 
