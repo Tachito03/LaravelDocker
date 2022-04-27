@@ -1,1 +1,3 @@
-chmod -R 0777 storage/*
+set -e
+
+chmod -R 777 storage/*
