@@ -86,8 +86,8 @@ jobs:
          target: "/var/www/dev"
          strip_components: 1
          script: |
-          chmod -R 777 /var/dev/storage/*
-          chmod -R 777 /var/dev/bootstrap/cache
+          chmod -R gu+w storage
+          chmod -R guo+w storage
 
      - name: Clean cache
        run: | 
@@ -150,10 +150,4 @@ jobs:
         php artisan config:clear
         php artisan route:clear
         php artisan cache:clear
-
-
-        
-        
-        
-        
         
