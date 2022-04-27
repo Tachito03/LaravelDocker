@@ -138,8 +138,8 @@ jobs:
          target: "/var/www/html"
          strip_components: 1
          script: |
-          chmod -Rf 777 /var/www/html/storage/*
-          chmod -Rf 777 /var/www/html/bootstrap/cache
+          chmod -Rf 0777 /var/www/html/storage/*
+          chmod -Rf 0777 /var/www/html/bootstrap/cache
 
      - name: Clean cache
        run: | 
