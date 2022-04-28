@@ -74,7 +74,13 @@ jobs:
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
- 
+
+     - name: Npm Install
+       run: npm install
+
+     - name: Npm prod
+       run: npm run prod
+
      - name: Copy dotenv file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
 
