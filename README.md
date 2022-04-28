@@ -25,7 +25,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
 ## Laravel Sponsors
 
@@ -44,8 +44,10 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[DevSquad](https://devsquad.com)**
 - **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
 - **[OP.GG](https://op.gg)**
+- **[CMS Max](https://www.cmsmax.com/)**
 - **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
 - **[Lendio](https://lendio.com)**
+- **[Romega Software](https://romegasoftware.com)**
 
 ## Contributing
 
@@ -62,35 +64,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## INSTRUCCIONES PARA INSTALAR EL PROYECTO
-- Posicionarse en raíz de donde se ejecuta las aplicaciones/proyectos en este caso ubuntu
-  <p>"\\wsl$\Ubuntu-18.04\home\usuario\" </p>
-  
-- Ejecutar el siguiente linea para clonar el proyecto desde GIT (Desde la ruta donde se va clonar los archivos)
-  <p>git clone https://github.com/Bash-th/TestLaravel.git</p>
- 
-- Con el editor de código Abrir el proyecto (O ejecutar code .) y editar el archivo .env.example para configurar la conexión a la base de datos (host, nombre, usuario. password). Posteriormente guardarlo con el nombre .env
-       DB_HOST= host
-       
-       DB_DATABASE=nombre de la base de datos
-       
-       DB_USERNAME=usuario
-       
-       DB_PASSWORD=contraseña
-       
-- Ejecutar el sig comando para que el contenedor Docker escriba o cree la carpeta vendor y aparezca en el host
-    <p>docker run --rm --interactive --tty -v $(pwd):/app composer install</p>
-    
-- Ejecutar el siguente comando para que Laravel cree un nuevo KEY
-    <p>sail artisan key:generate</p>
-       
-- Ejecutar el siguiente comando para inicial el proyecto
-    sail up -d
-    
-- Ejecutar el siguente comando para crear migraciones de tablas en la BD (O tambien se puede importar la BD directo desde Workbench/Heidi SQL que está en la carpeta sql-project)
- <p>sail artisan migrate</p>
- 
- <p> En el navegador ejecutar "localhost" para ver el proyecto</p>
-Listo, con esto debe de funcionar el proyecto
-

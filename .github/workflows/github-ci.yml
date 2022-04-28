@@ -37,7 +37,13 @@ jobs:
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
- 
+     
+     - name: Npm Install
+       run: npm install
+
+     - name: Npm prod
+       run: npm run prod
+     
      - name: Generate key
        run: php artisan key:generate
  
