@@ -81,7 +81,7 @@ jobs:
          HOST: ${{ secrets.SSH_HOST }}
          KEY: ${{ secrets.SSH_KEY }}
          USERNAME: ${{ secrets.SSH_USERNAME }}  
-         PORT: ${{ secrets.SSH_USERNAME }}          
+         PORT: ${{ secrets.SSH_PORT }}          
        with: 
          source: "."
          target: "/var/www/dev"
