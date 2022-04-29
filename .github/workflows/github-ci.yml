@@ -78,8 +78,8 @@ jobs:
      - name: Npm Install
        run: npm install
 
-     - name: Npm prod
-       run: npm run prod
+     - name: Npm dev
+       run: npm run dev
 
      - name: Copy dotenv file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
@@ -97,27 +97,11 @@ jobs:
          source: "."
          target: "/var/www/dev"
          strip_components: 1
-<<<<<<< HEAD
-         script: |
-          chmod -R 777 /var/dev/storage/*
-          chmod -R 777 /var/dev/bootstrap/cache
-
-     - name: Clean cache
-       run: | 
-        php artisan config:clear
-        php artisan route:clear
-        php artisan cache:clear
-=======
          use_insecure_cipher : true
->>>>>>> dev
 
  deploy-production:
    runs-on: ubuntu-latest
    needs: [tests-laravel]
-<<<<<<< HEAD
-   #if: github.ref == 'refs/heads/master'
-=======
->>>>>>> dev
    #if: github.event_name == 'pull_request'
    if: github.ref == 'refs/heads/master'
    steps:
@@ -139,7 +123,13 @@ jobs:
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
- 
+     
+     - name: Npm Install
+       run: npm install
+     
+     - name: Npm prod
+       run: npm run prod
+     
      - name: Copy dotenv file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV_PROD }}');"
 
@@ -156,26 +146,4 @@ jobs:
          source: "."
          target: "/var/www/html"
          strip_components: 1
-<<<<<<< HEAD
-         #script: |
-          #sudo chmod -R 0777 ./storage/*
-          #sudo chmod -R 0777 ./bootstrap/cache
-     - name: Changing Permisos
-       run: |
-        sudo chgrp -R www-data storage bootstrap/cache
-        sudo chmod -R ug+rwx storage bootstrap/cache
-
-     - name: Clean cache
-       run: | 
-        php artisan config:clear
-        php artisan route:clear
-        php artisan cache:clear
-
-
-        
-        
-        
-        
-=======
->>>>>>> dev
         
