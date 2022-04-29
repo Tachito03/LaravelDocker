@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Route;
-//use Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 /*Route::get('/', function () {
     return view('welcome');
 });*/
@@ -31,3 +32,6 @@ Route::post('/login', 'App\Http\Controllers\UserController@postLogin')->name('lo
 Route::post('/user/{id}', 'App\Http\Controllers\UserController@PostEditUser')->name('edit-post');
 Route::post('/user/{id}/delete', 'App\Http\Controllers\UserController@PostDeleteUser')->name('Delete');
 Route::get('/logout', 'App\Http\Controllers\UserController@getlogout')->name('Logout-get');
+=======
+Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
+>>>>>>> dev
