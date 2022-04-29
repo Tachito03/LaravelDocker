@@ -38,12 +38,6 @@ jobs:
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
      
-     - name: Npm Install
-       run: npm install
-
-     - name: Npm dev
-       run: npm run dev
-     
      - name: Generate key
        run: php artisan key:generate
  
@@ -78,8 +72,8 @@ jobs:
      - name: Npm Install
        run: npm install
 
-     - name: Npm prod
-       run: npm run prod
+     - name: Npm dev
+       run: npm run dev
 
      - name: Copy dotenv file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
@@ -123,7 +117,13 @@ jobs:
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
- 
+    
+     - name: Npm Install
+       run: npm install
+
+     - name: Npm prod
+       run: npm run prod
+     
      - name: Copy dotenv file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV_PROD }}');"
 
