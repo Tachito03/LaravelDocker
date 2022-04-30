@@ -117,10 +117,17 @@ jobs:
  
      - name: Install dependencies
        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+<<<<<<< HEAD
      
      - name: Npm Install
        run: npm install
      
+=======
+    
+     - name: Npm Install
+       run: npm install
+
+>>>>>>> dev
      - name: Npm prod
        run: npm run prod
      
