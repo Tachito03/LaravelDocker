@@ -1,4 +1,4 @@
-name: ci/cd workflow
+name: CI workflow
  
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
    runs-on: ubuntu-latest
    strategy:
      matrix:
-       php: [8.0.0]
+       php: [8.0]
  
    name: Prueba - PHP ${{ matrix.php }}
    steps:
@@ -54,7 +54,6 @@ jobs:
    runs-on: ubuntu-latest
    needs: tests-laravel
    if: github.ref == 'refs/heads/dev'
-   #if: github.event_name != 'pull_request'
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -78,11 +77,11 @@ jobs:
      - name: Npm Install
        run: npm install
 
-     - name: Npm prod
-       run: npm run prod
+     - name: Npm dev
+       run: npm run dev
 
-     - name: Copy dotenv file
-       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV }}');"
+     - name: Copy env file
+       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.ENV_QA}}');"
 
      - name: Generate Key
        run: php artisan key:generate
@@ -97,7 +96,10 @@ jobs:
          source: "."
          target: "/var/www/dev"
          strip_components: 1
-         use_insecure_cipher : true
+         #use_insecure_cipher : true
+
+     - name: Changing Permissions
+       run: chmod -R 777 storage/*
 
  deploy-production:
    runs-on: ubuntu-latest
@@ -130,8 +132,8 @@ jobs:
      - name: Npm prod
        run: npm run prod
      
-     - name: Copy dotenv file
-       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.DOT_ENV_PROD }}');"
+     - name: Copy env file
+       run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.ENV_PROD }}');"
 
      - name: Generate Key
        run: php artisan key:generate
