@@ -61,6 +61,9 @@ jobs:
 
      - name: Copy env file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.ENV_QA}}');"
+       
+     - name: Generate key
+       run: php artisan key:generate
 
      - name: Deploy-development
        uses: appleboy/scp-action@v0.1.0
