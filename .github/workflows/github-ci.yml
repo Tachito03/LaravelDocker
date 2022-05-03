@@ -82,6 +82,9 @@ jobs:
 
      - name: Copy env file
        run: php -r "file_put_contents(__DIR__ . '/.env', '${{ secrets.ENV_QA}}');"
+    
+     - name: Migrate Database
+       run: php artisan migrate
 
      - name: Generate Key
        run: php artisan key:generate
