@@ -96,7 +96,7 @@ jobs:
          source: "."
          target: "/var/www/dev"
          strip_components: 1
-         use_insecure_cipher : true
+         #use_insecure_cipher : true
 
      - name: Changing Permissions
        run: chmod -R 777 storage/*
