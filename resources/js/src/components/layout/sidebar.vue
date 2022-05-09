@@ -303,15 +303,12 @@
                     </a>
                     <b-collapse id="datatables" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link tag="li" to="/tables/basic" @click.native="toggleMobileMenu"><a>Basic</a></router-link>
-                            <router-link tag="li" to="/tables/striped" @click.native="toggleMobileMenu"><a>Striped Table</a></router-link>
-                            <router-link tag="li" to="/tables/order-sorting" @click.native="toggleMobileMenu"><a>Order Sorting</a></router-link>
                             <router-link tag="li" to="/tables/multi-column" @click.native="toggleMobileMenu"><a>Multi Column</a></router-link>
                             <router-link tag="li" to="/tables/multiple-tables" @click.native="toggleMobileMenu"><a>Multiple Tables</a></router-link>
                             <router-link tag="li" to="/tables/alt-pagination" @click.native="toggleMobileMenu"><a>Alt. Pagination</a></router-link>
                             <router-link tag="li" to="/tables/custom" @click.native="toggleMobileMenu"><a>Custom</a></router-link>
                             <router-link tag="li" to="/tables/export" @click.native="toggleMobileMenu"><a>Export</a></router-link>
-                            <router-link tag="li" to="/tables/miscellaneous" @click.native="toggleMobileMenu"><a>Miscellaneous</a></router-link>
+                           
                         </ul>
                     </b-collapse>
                 </li>

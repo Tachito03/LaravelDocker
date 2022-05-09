@@ -66,9 +66,9 @@
                                     </div>
                                 </div>
                             </b-form>
-                            <p class="terms-conditions">
-                                © 2022 All Rights Reserved.
-                                <a href="javascript:void(0);">Privacidad</a>, y <a href="javascript:void(0);">Términos</a>.
+                            <p class="terms-conditions text-center">
+                                © 2022 Todos los derechos reservados. <br>
+                                <a href="javascript:void(0);">Aviso de Privacidad</a>.
                             </p>
                         </div>
                     </div>

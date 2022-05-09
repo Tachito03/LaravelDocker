@@ -249,21 +249,6 @@ const routes = [
 
     //tables
     {
-        path: '/tables/basic',
-        name: 'table-basic',
-        component: () => import(/* webpackChunkName: "tables-basic" */ '../views/tables/basic.vue')
-    },
-    {
-        path: '/tables/striped',
-        name: 'striped',
-        component: () => import(/* webpackChunkName: "tables-striped" */ '../views/tables/striped.vue')
-    },
-    {
-        path: '/tables/order-sorting',
-        name: 'order-sorting',
-        component: () => import(/* webpackChunkName: "tables-order-sorting" */ '../views/tables/order_sorting.vue')
-    },
-    {
         path: '/tables/multi-column',
         name: 'multi-column',
         component: () => import(/* webpackChunkName: "tables-multi-column" */ '../views/tables/multi_column.vue')
@@ -287,14 +272,7 @@ const routes = [
         path: '/tables/export',
         name: 'export',
         component: () => import(/* webpackChunkName: "tables-export" */ '../views/tables/export.vue')
-    },
-    {
-        path: '/tables/miscellaneous',
-        name: 'miscellaneous',
-        component: () => import(/* webpackChunkName: "tables-miscellaneous" */ '../views/tables/miscellaneous.vue')
-    }
-
-    
+    }    
 ];
 
 const router = new VueRouter({
