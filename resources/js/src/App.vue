@@ -13,7 +13,7 @@
     export default {
         metaInfo: {
             title: 'Admin',
-            titleTemplate: '%s | CYP dev - Multipurpose Bootstrap Dashboard Templates'
+            titleTemplate: '%s | System CYP'
         },
         components: {
             app: appLayout,

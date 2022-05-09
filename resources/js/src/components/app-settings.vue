@@ -42,15 +42,14 @@
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </a>
-                <div class="text-center">
+                <!--<div class="text-center">
                     <img src="@/assets/images/features_overview.svg" alt="..." class="img-fluid" />
-                </div>
-                <h5 class="mb-0 text-center">TEMPLATE CUSTOMIZER</h5>
-                <p class="text-center">Set preferences that will be cookied for your live preview demonstration.</p>
+                </div>-->
+                <h5 class="mb-0 text-center">Sistema de Administración CyP</h5>
+                <p class="text-center">Establezca sus preferencias del sistema</p>
                 <hr />
 
-                <h6 class="mb-1">Color Scheme</h6>
-                <p class="small text-muted mb-3">Overall light or dark presentation.</p>
+                <h6 class="mb-1">Color del sistema</h6>
                 <div class="btn-group-toggle row mb-4 mx-0">
                     <b-radio v-model="$store.state.dark_mode" class="text-color radio-primary col-6 pl-0 mb-3 btn-check" value="light" @change="setTemplateStyle"
                         ><svg
@@ -75,7 +74,7 @@
                             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                         </svg>
-                        Light Mode</b-radio
+                         Claro</b-radio
                     >
                     <b-radio v-model="$store.state.dark_mode" class="text-color radio-primary col-6 pl-0 mb-3 btn-check" value="dark" @change="setTemplateStyle"
                         ><svg
@@ -92,9 +91,9 @@
                         >
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
-                        Dark Mode</b-radio
+                         Oscuro</b-radio
                     >
-                    <b-radio v-model="$store.state.dark_mode" class="text-color radio-primary col-12 pl-0 btn-check" value="system" @change="setTemplateStyle">
+                    <!--<b-radio v-model="$store.state.dark_mode" class="text-color radio-primary col-12 pl-0 btn-check" value="system" @change="setTemplateStyle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -110,17 +109,17 @@
                             <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
                             <polygon points="12 15 17 21 7 21 12 15"></polygon></svg
                         >System</b-radio
-                    >
+                    >-->
                 </div>
-                <h6 class="mb-1">Navigation Position</h6>
-                <p class="small text-muted mb-3">Select the primary navigation paradigm for your app.</p>
+                <h6 class="mb-1">Posición de navegación</h6>
+                <p class="small text-muted mb-3">Seleccione un posición de navegación de su aplicación</p>
                 <div class="btn-group-toggle row mb-4 mx-0">
-                    <b-radio v-model="$store.state.menu_style" class="text-color radio-primary col-6 pl-0 mb-3 btn-check" value="horizontal" @change="setMenuStyle">Horizontal</b-radio>
-                    <b-radio v-model="$store.state.menu_style" class="text-color radio-primary col-6 pl-0 mb-3 btn-check" value="vertical" @change="setMenuStyle">Vertical</b-radio>
-                    <b-radio v-model="$store.state.menu_style" class="text-color radio-primary col-12 pl-0 btn-check" value="collapsible-vertical" @change="setMenuStyle">Collapsible Vertical</b-radio>
+                    <!--<b-radio v-model="$store.state.menu_style" class="text-color radio-primary col-6 pl-0 mb-3 btn-check" value="horizontal" @change="setMenuStyle">Horizontal</b-radio>-->
+                    <b-radio v-model="$store.state.menu_style" class="text-color radio-primary col-4 pl-0 mb-3 btn-check" value="vertical" @change="setMenuStyle">Vertical</b-radio>
+                    <b-radio v-model="$store.state.menu_style" class="text-color radio-primary col-8 pl-0 mb-3 btn-check" value="collapsible-vertical" @change="setMenuStyle">Pegable Vertical</b-radio>
                 </div>
-                <h6 class="mb-1">Layout Style</h6>
-                <p class="small text-muted mb-3">Select the primary Layout Style for your app.</p>
+                <h6 class="mb-1">Estilo de diseño</h6>
+                <p class="small text-muted mb-3">Seleccione un estilo de diseño de su aplicación</p>
                 <div class="btn-group-toggle row mx-0">
                     <b-radio v-model="$store.state.layout_style" class="text-color radio-primary col-3 pl-0 btn-check" value="boxed-layout" @change="setLayoutStyle">Box</b-radio>
                     <b-radio v-model="$store.state.layout_style" class="text-color radio-primary col-5 pl-0 btn-check" value="large-boxed-layout" @change="setLayoutStyle">Large box</b-radio>

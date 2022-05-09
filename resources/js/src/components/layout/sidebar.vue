@@ -53,6 +53,40 @@
                         </ul>
                     </b-collapse>
                 </li>
+                <!--Empieza configuración general del sistema-->
+                <li class="menu">
+                    <a href="#config_gral" v-b-toggle class="dropdown-toggle" @click.prevent>
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                            <span>{{ $t('General') }}</span>
+                        </div>
+                        <div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                            >
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <b-collapse id="config_gral" accordion="menu">
+                        <ul class="collapse submenu list-unstyled show">
+                            <router-link tag="li" to="/config/users" @click.native="toggleMobileMenu"><a>Gestion Usuarios</a></router-link>
+                            <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
+                            <router-link tag="li" to="/config/catalogs" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
+                            <router-link tag="li" to="/config/access" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
+                        </ul>
+                    </b-collapse>
+                </li>
+                <!-- Termina configuración general sistema-->
 
                 <li class="menu">
                     <a href="#app" v-b-toggle class="dropdown-toggle" @click.prevent>
@@ -101,11 +135,8 @@
                     </a>
                     <b-collapse id="app" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link tag="li" to="/apps/chat" @click.native="toggleMobileMenu"><a>Chat</a></router-link>
                             <router-link tag="li" to="/apps/mailbox" @click.native="toggleMobileMenu"><a>Mailbox</a></router-link>
                             <router-link tag="li" to="/apps/todo-list" @click.native="toggleMobileMenu"><a>Todo List</a></router-link>
-                            <router-link tag="li" to="/apps/notes" @click.native="toggleMobileMenu"><a>Notes</a></router-link>
-                            <router-link tag="li" to="/apps/scrumboard" @click.native="toggleMobileMenu"><a>Scrumboard</a></router-link>
                             <router-link tag="li" to="/apps/contacts" @click.native="toggleMobileMenu"><a>Contacts</a></router-link>
                             <li>
                                 <a href="#appInvoice" v-b-toggle class="dropdown-toggle" @click.prevent>
@@ -180,19 +211,9 @@
                     <b-collapse id="components" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
                             <router-link tag="li" to="/components/tabs" @click.native="toggleMobileMenu"><a>Tabs</a></router-link>
-                            <router-link tag="li" to="/components/accordions" @click.native="toggleMobileMenu"><a>Accordions</a></router-link>
                             <router-link tag="li" to="/components/modals" @click.native="toggleMobileMenu"><a>Modals</a></router-link>
-                            <router-link tag="li" to="/components/cards" @click.native="toggleMobileMenu"><a>Cards</a></router-link>
-                            <router-link tag="li" to="/components/carousel" @click.native="toggleMobileMenu"><a>Carousel</a></router-link>
-                            <router-link tag="li" to="/components/countdown" @click.native="toggleMobileMenu"><a>Countdown</a></router-link>
-                            <router-link tag="li" to="/components/counter" @click.native="toggleMobileMenu"><a>Counter</a></router-link>
                             <router-link tag="li" to="/components/sweetalert" @click.native="toggleMobileMenu"><a>Sweet Alerts</a></router-link>
-                            <router-link tag="li" to="/components/timeline" @click.native="toggleMobileMenu"><a>Timeline</a></router-link>
                             <router-link tag="li" to="/components/notifications" @click.native="toggleMobileMenu"><a>Notifications</a></router-link>
-                            <router-link tag="li" to="/components/media-object" @click.native="toggleMobileMenu"><a>Media Object</a></router-link>
-                            <router-link tag="li" to="/components/list-group" @click.native="toggleMobileMenu"><a>List Group</a></router-link>
-                            <router-link tag="li" to="/components/pricing-table" @click.native="toggleMobileMenu"><a>Pricing Tables</a></router-link>
-                            <router-link tag="li" to="/components/lightbox" @click.native="toggleMobileMenu"><a> Lightbox </a></router-link>
                         </ul>
                     </b-collapse>
                 </li>
@@ -236,97 +257,11 @@
                     <b-collapse id="elements" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
                             <router-link tag="li" to="/elements/alerts" @click.native="toggleMobileMenu"><a>Alerts</a></router-link>
-                            <router-link tag="li" to="/elements/avatar" @click.native="toggleMobileMenu"><a>Avatar</a></router-link>
-                            <router-link tag="li" to="/elements/badges" @click.native="toggleMobileMenu"><a>Badges</a></router-link>
-                            <router-link tag="li" to="/elements/breadcrumbs" @click.native="toggleMobileMenu"><a>Breadcrumbs</a></router-link>
                             <router-link tag="li" to="/elements/buttons" @click.native="toggleMobileMenu"><a>Buttons</a></router-link>
-                            <router-link tag="li" to="/elements/buttons-group" @click.native="toggleMobileMenu"><a>Button Groups</a></router-link>
-                            <router-link tag="li" to="/elements/color-library" @click.native="toggleMobileMenu"><a>Color Library</a></router-link>
-                            <router-link tag="li" to="/elements/dropdown" @click.native="toggleMobileMenu"><a>Dropdown</a></router-link>
-                            <router-link tag="li" to="/elements/infobox" @click.native="toggleMobileMenu"><a>Infobox</a></router-link>
-                            <router-link tag="li" to="/elements/jumbotron" @click.native="toggleMobileMenu"><a>Jumbotron</a></router-link>
-                            <router-link tag="li" to="/elements/loader" @click.native="toggleMobileMenu"><a>Loader</a></router-link>
-                            <router-link tag="li" to="/elements/pagination" @click.native="toggleMobileMenu"><a>Pagination</a></router-link>
-                            <router-link tag="li" to="/elements/popovers" @click.native="toggleMobileMenu"><a>Popovers</a></router-link>
-                            <router-link tag="li" to="/elements/progress-bar" @click.native="toggleMobileMenu"><a>Progress Bar</a></router-link>
-                            <router-link tag="li" to="/elements/search" @click.native="toggleMobileMenu"><a>Search</a></router-link>
                             <router-link tag="li" to="/elements/tooltips" @click.native="toggleMobileMenu"><a>Tooltips</a></router-link>
-                            <router-link tag="li" to="/elements/treeview" @click.native="toggleMobileMenu"><a>Treeview</a></router-link>
-                            <router-link tag="li" to="/elements/typography" @click.native="toggleMobileMenu"><a>Typography</a></router-link>
                         </ul>
                     </b-collapse>
                 </li>
-
-                <router-link tag="li" to="/font-icons" class="menu" @click.native="toggleMobileMenu">
-                    <a class="dropdown-toggle">
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-target"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <circle cx="12" cy="12" r="6"></circle>
-                                <circle cx="12" cy="12" r="2"></circle>
-                            </svg>
-                            <span>{{ $t('font_icons') }}</span>
-                        </div>
-                    </a>
-                </router-link>
-
-                <router-link tag="li" to="/widgets" class="menu" @click.native="toggleMobileMenu">
-                    <a class="dropdown-toggle">
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-airplay"
-                            >
-                                <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
-                                <polygon points="12 15 17 21 7 21 12 15"></polygon>
-                            </svg>
-                            <span>{{ $t('widgets') }}</span>
-                        </div>
-                    </a>
-                </router-link>
-
-                <router-link tag="li" to="/tables" class="menu" @click.native="toggleMobileMenu">
-                    <a class="dropdown-toggle">
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-layout"
-                            >
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="3" y1="9" x2="21" y2="9"></line>
-                                <line x1="9" y1="21" x2="9" y2="9"></line>
-                            </svg>
-                            <span>{{ $t('tables') }}</span>
-                        </div>
-                    </a>
-                </router-link>
 
                 <li class="menu">
                     <a href="#datatables" v-b-toggle class="dropdown-toggle" @click.prevent>
@@ -375,9 +310,7 @@
                             <router-link tag="li" to="/tables/multiple-tables" @click.native="toggleMobileMenu"><a>Multiple Tables</a></router-link>
                             <router-link tag="li" to="/tables/alt-pagination" @click.native="toggleMobileMenu"><a>Alt. Pagination</a></router-link>
                             <router-link tag="li" to="/tables/custom" @click.native="toggleMobileMenu"><a>Custom</a></router-link>
-                            <router-link tag="li" to="/tables/range-search" @click.native="toggleMobileMenu"><a>Range Search</a></router-link>
                             <router-link tag="li" to="/tables/export" @click.native="toggleMobileMenu"><a>Export</a></router-link>
-                            <router-link tag="li" to="/tables/live-dom-ordering" @click.native="toggleMobileMenu"><a>Live DOM ordering</a></router-link>
                             <router-link tag="li" to="/tables/miscellaneous" @click.native="toggleMobileMenu"><a>Miscellaneous</a></router-link>
                         </ul>
                     </b-collapse>
@@ -426,15 +359,10 @@
                             <router-link tag="li" to="/forms/input-group" @click.native="toggleMobileMenu"><a>Input Group</a></router-link>
                             <router-link tag="li" to="/forms/layouts" @click.native="toggleMobileMenu"><a>Layouts</a></router-link>
                             <router-link tag="li" to="/forms/validation" @click.native="toggleMobileMenu"><a>Validation</a></router-link>
-                            <router-link tag="li" to="/forms/input-mask" @click.native="toggleMobileMenu"><a>Input Mask</a></router-link>
                             <router-link tag="li" to="/forms/select2" @click.native="toggleMobileMenu"><a>Select2</a></router-link>
-                            <router-link tag="li" to="/forms/touchspin" @click.native="toggleMobileMenu"><a>TouchSpin</a></router-link>
                             <router-link tag="li" to="/forms/checkbox-radio" @click.native="toggleMobileMenu"><a>Checkbox &amp; Radio</a></router-link>
                             <router-link tag="li" to="/forms/switches" @click.native="toggleMobileMenu"><a>Switches</a></router-link>
-                            <router-link tag="li" to="/forms/wizards" @click.native="toggleMobileMenu"><a>Wizards</a></router-link>
                             <router-link tag="li" to="/forms/file-upload" @click.native="toggleMobileMenu"><a>File Upload</a></router-link>
-                            <router-link tag="li" to="/forms/quill-editor" @click.native="toggleMobileMenu"><a>Quill Editor</a></router-link>
-                            <router-link tag="li" to="/forms/markdown-editor" @click.native="toggleMobileMenu"><a>Markdown Editor</a></router-link>
                             <router-link tag="li" to="/forms/date-picker" @click.native="toggleMobileMenu"><a>Date &amp; Range Picker </a></router-link>
                             <router-link tag="li" to="/forms/clipboard" @click.native="toggleMobileMenu"><a>Clipboard</a></router-link>
                         </ul>
@@ -528,12 +456,6 @@
                     <b-collapse id="pages" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
                             <router-link tag="li" to="/pages/helpdesk" @click.native="toggleMobileMenu"><a>Helpdesk</a></router-link>
-                            <router-link tag="li" to="/pages/contact-us" @click.native="toggleMobileMenu"><a>Contact Form</a></router-link>
-                            <router-link tag="li" to="/pages/faq" @click.native="toggleMobileMenu"><a>FAQ</a></router-link>
-                            <router-link tag="li" to="/pages/faq2" @click.native="toggleMobileMenu"><a>FAQ 2</a></router-link>
-                            <router-link tag="li" to="/pages/privacy-policy" @click.native="toggleMobileMenu"><a>Privacy Policy</a></router-link>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/pages/coming-soon">Coming Soon</a></li>
-
                             <li>
                                 <a href="#pages-error" v-b-toggle class="dropdown-toggle" @click.prevent>
                                     Error
@@ -557,95 +479,13 @@
                                         <li @click="toggleMobileMenu"><a target="_blank" href="/pages/error404">404</a></li>
                                         <li @click="toggleMobileMenu"><a target="_blank" href="/pages/error500">500</a></li>
                                         <li @click="toggleMobileMenu"><a target="_blank" href="/pages/error503">503</a></li>
-                                        <li @click="toggleMobileMenu"><a target="_blank" href="/pages/maintenence">Maintanence</a></li>
                                     </ul>
                                 </b-collapse>
                             </li>
-
-                            <router-link tag="li" to="/pages/blank-page" @click.native="toggleMobileMenu"><a>Blank Page</a></router-link>
                             <router-link tag="li" to="/pages/sample" @click.native="toggleMobileMenu"><a>Sample Page</a></router-link>
                         </ul>
                     </b-collapse>
                 </li>
-
-                <li class="menu">
-                    <a href="#authentication" v-b-toggle class="dropdown-toggle" @click.prevent>
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-lock"
-                            >
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                            <span>{{ $t('authentication') }}</span>
-                        </div>
-                        <div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-chevron-right"
-                            >
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </div>
-                    </a>
-                    <b-collapse id="authentication" accordion="menu">
-                        <ul class="collapse submenu list-unstyled show">
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/login-boxed">Login Boxed</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/register-boxed">Register Boxed</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/lockscreen-boxed">Unlock Boxed</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/pass-recovery-boxed">Recover ID Boxed</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/login">Login Cover</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/register">Register Cover</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/lockscreen">Unlock Cover</a></li>
-                            <li @click="toggleMobileMenu"><a target="_blank" href="/auth/pass-recovery">Recover ID Cover</a></li>
-                        </ul>
-                    </b-collapse>
-                </li>
-
-                <router-link tag="li" to="/dragndrop" class="menu" @click.native="toggleMobileMenu">
-                    <a class="dropdown-toggle">
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-move"
-                            >
-                                <polyline points="5 9 2 12 5 15"></polyline>
-                                <polyline points="9 5 12 2 15 5"></polyline>
-                                <polyline points="15 19 12 22 9 19"></polyline>
-                                <polyline points="19 9 22 12 19 15"></polyline>
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <line x1="12" y1="2" x2="12" y2="22"></line>
-                            </svg>
-                            <span>{{ $t('drag_and_drop') }}</span>
-                        </div>
-                    </a>
-                </router-link>
-
                 <router-link tag="li" to="/charts/apex-chart" class="menu" @click.native="toggleMobileMenu">
                     <a class="dropdown-toggle">
                         <div class="">
@@ -668,29 +508,6 @@
                         </div>
                     </a>
                 </router-link>
-
-                <li class="menu" @click="toggleMobileMenu">
-                    <a target="_blank" href="https://cork-vue.sbthemes.com" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-book"
-                            >
-                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                            </svg>
-                            <span>{{ $t('documentation') }}</span>
-                        </div>
-                    </a>
-                </li>
 
                 <!--</ul>-->
             </perfect-scrollbar>

@@ -10,7 +10,7 @@
                         </router-link>
                     </li>
                     <li class="nav-item theme-text">
-                        <router-link to="/" class="nav-link"> CYP dev</router-link>
+                        <router-link to="/dashboard" class="nav-link"> CYP</router-link>
                     </li>
                 </ul>
                 <div class="d-none horizontal-menu">
@@ -35,94 +35,10 @@
                 </div>
                 <ul class="navbar-item flex-row ml-md-0 ml-auto">
                     <li class="nav-item align-self-center search-animated" :class="{ 'show-search': $store.state.is_show_search }">
-                        <svg
-                            @click="$store.commit('toggleSearch', !$store.state.is_show_search)"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-search toggle-search"
-                        >
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        <form class="form-inline search-full form-inline search" :class="{ 'input-focused': $store.state.is_show_search }">
-                            <div class="search-bar">
-                                <input type="text" class="form-control search-form-control ml-lg-auto" placeholder="Search..." />
-                            </div>
-                        </form>
                     </li>
                 </ul>
 
                 <div class="navbar-item flex-row ml-md-auto">
-                    <div class="dark-mode d-flex align-items-center">
-                        <a v-if="$store.state.dark_mode == 'light'" href="javascript:;" class="d-flex align-items-center" @click="toggleMode('dark')">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-sun"
-                            >
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                            <span class="ml-2">Light</span>
-                        </a>
-                        <a v-if="$store.state.dark_mode == 'dark'" href="javascript:;" class="d-flex align-items-center" @click="toggleMode('system')">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-moon"
-                            >
-                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                            </svg>
-                            <span class="ml-2">Dark</span>
-                        </a>
-                        <a v-if="$store.state.dark_mode == 'system'" href="javascript:;" class="d-flex align-items-center" @click="toggleMode('light')">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-airplay"
-                            >
-                                <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
-                                <polygon points="12 15 17 21 7 21 12 15"></polygon>
-                            </svg>
-                            <span class="ml-2">System</span>
-                        </a>
-                    </div>
-
                     <b-dropdown toggle-tag="a" variant="icon-only" toggle-class="nav-link" class="nav-item language-dropdown">
                         <template #button-content>
                             <img v-if="selectedLang" :src="require(`@/assets/images/flags/${selectedLang.code}.png`)" class="flag-width" alt="flag" />
@@ -140,57 +56,7 @@
                         </perfect-scrollbar>
                     </b-dropdown>
 
-                    <b-dropdown toggle-tag="a" variant="icon-only" toggle-class="nav-link" class="nav-item message-dropdown" :right="true">
-                        <template #button-content>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-mail"
-                            >
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                        </template>
 
-                        <b-dropdown-item>
-                            <b-media class="media">
-                                <template #aside>
-                                    <div class="avatar avatar-xl">
-                                        <span class="avatar-title rounded-circle">KY</span>
-                                    </div>
-                                </template>
-                                <h5 class="usr-name">Kara Young</h5>
-                                <p class="msg-title">ACCOUNT UPDATE</p>
-                            </b-media>
-                        </b-dropdown-item>
-                        <b-dropdown-item>
-                            <b-media class="media">
-                                <template #aside>
-                                    <img src="@/assets/images/profile-15.jpeg" alt="avatar" />
-                                </template>
-                                <h5 class="usr-name">Daisy Anderson</h5>
-                                <p class="msg-title">ACCOUNT UPDATE</p>
-                            </b-media>
-                        </b-dropdown-item>
-                        <b-dropdown-item>
-                            <b-media class="media">
-                                <template #aside>
-                                    <div class="avatar avatar-xl">
-                                        <span class="avatar-title rounded-circle">OG</span>
-                                    </div>
-                                </template>
-                                <h5 class="usr-name">Oscar Garner</h5>
-                                <p class="msg-title">ACCOUNT UPDATE</p>
-                            </b-media>
-                        </b-dropdown-item>
-                    </b-dropdown>
 
                     <b-dropdown toggle-tag="a" variant="icon-only" toggle-class="nav-link" menu-class="notification-scroll" class="nav-item notification-dropdown" :right="true">
                         <template #button-content>
@@ -391,25 +257,6 @@
                             Inbox
                         </b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item to="/auth/lockscreen">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-lock"
-                            >
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                            Lock Screen
-                        </b-dropdown-item>
-                        <b-dropdown-divider></b-dropdown-divider>
                         <b-dropdown-item to="/auth/login">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -427,7 +274,7 @@
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>
                             </svg>
-                            Sign Out
+                            Salir
                         </b-dropdown-item>
                     </b-dropdown>
                 </div>

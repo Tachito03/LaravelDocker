@@ -6,8 +6,8 @@
                     <div class="form-container">
                         <div class="form-content">
 
-                            <h1 class="">Password Recovery</h1>
-                            <p class="signup-link">Enter your email and instructions will sent to you!</p>
+                            <h2 class="">Recuperar contraseña</h2>
+                            <p class="signup-link">Ingrese su email para restablecer la contraseña !</p>
                             <b-form class="text-left">
                                 <div class="form">
 
@@ -17,13 +17,13 @@
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper">
-                                            <b-button type="submit" variant="primary">Reset</b-button>
+                                            <b-button type="submit" variant="primary">Enviar</b-button>
                                         </div>
                                     </div>
 
                                 </div>
                             </b-form>
-                            <p class="terms-conditions">© 2020 All Rights Reserved. <router-link to="/">CORK</router-link> is a product of Arrangic Solutions LLP. <a href="javascript:void(0);">Cookie Preferences</a>, <a href="javascript:void(0);">Privacy</a>, and <a href="javascript:void(0);">Terms</a>.</p>
+                            <p class="terms-conditions">© 2022 All Rights Reserved.  <a href="javascript:void(0);">Privacidad</a>, y <a href="javascript:void(0);">Términos</a>.</p>
 
                         </div>
                     </div>

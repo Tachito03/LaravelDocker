@@ -5,10 +5,13 @@
                 <div class="form-form-wrap">
                     <div class="form-container">
                         <div class="form-content">
-                            <h1 class="">
-                                Log In to <router-link to="/"><span class="brand-name">CORK</span></router-link>
+                            <h1 class="text-center">
+                                <span class="brand-name">Bienvenido a CyP</span>
                             </h1>
-                            <p class="signup-link">New Here? <router-link to="/auth/register">Create an account</router-link></p>
+                            <h4 class="text-center">
+                                <span class="brand-name">Iniciar sesión</span>
+                            </h4>
+                            
                             <b-form class="text-left">
                                 <div class="form">
                                     <div id="username-field" class="field-wrapper input">
@@ -50,26 +53,22 @@
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper toggle-pass d-flex align-items-center">
-                                            <p class="d-inline-block">Show Password</p>
-                                            <b-checkbox switch class="switch s-primary"></b-checkbox>
+                                            <!--<p class="d-inline-block">Mostrar contraseña</p>
+                                            <b-checkbox switch class="switch s-primary"></b-checkbox>-->
                                         </div>
                                         <div class="field-wrapper">
-                                            <b-button type="submit" variant="primary">Log In</b-button>
+                                            <b-button type="submit" variant="primary">Entrar</b-button>
                                         </div>
-                                    </div>
-
-                                    <div class="field-wrapper text-center keep-logged-in">
-                                        <b-checkbox class="checkbox-outline-primary">Keep me logged in</b-checkbox>
                                     </div>
 
                                     <div class="field-wrapper">
-                                        <router-link to="/auth/pass-recovery" class="forgot-pass-link">Forgot Password?</router-link>
+                                        <router-link to="/auth/pass-recovery" class="forgot-pass-link">¿Olvidaste tu contraseña?</router-link>
                                     </div>
                                 </div>
                             </b-form>
                             <p class="terms-conditions">
-                                © 2020 All Rights Reserved. <router-link to="/">CORK</router-link> is a product of Arrangic Solutions LLP. <a href="javascript:void(0);">Cookie Preferences</a>,
-                                <a href="javascript:void(0);">Privacy</a>, and <a href="javascript:void(0);">Terms</a>.
+                                © 2022 All Rights Reserved.
+                                <a href="javascript:void(0);">Privacidad</a>, y <a href="javascript:void(0);">Términos</a>.
                             </p>
                         </div>
                     </div>
@@ -85,7 +84,7 @@
 <script>
     import '@/assets/sass/authentication/auth.scss';
     export default {
-        metaInfo: { title: 'Login Cover' },
+        metaInfo: { title: 'Inicio de sesión' },
         mounted() {},
         methods: {}
     };
