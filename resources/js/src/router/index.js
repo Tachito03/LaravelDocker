@@ -14,6 +14,20 @@ const routes = [
         meta: { layout: 'auth' }
     },
 
+    { 
+        path: '/login',
+        name: 'Inicio',
+        component: () => import(/* webpackChunkName: "auth-login" */ '../views/auth/login.vue'),
+        meta: { layout: 'auth' }
+    },
+
+    { 
+        path: '/create'
+        //name: 'crear',
+      //  component: () => import(/* webpackChunkName: "auth-login" */ '../views/auth/login.vue')
+        
+    },
+
     //dashboard
     {
         path: '/dashboard', 
