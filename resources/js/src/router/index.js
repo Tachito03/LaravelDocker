@@ -1,43 +1,45 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/index.vue';
+import Dashboard from '../views/dashboard.vue';
+import Inicio from '../views/auth/login.vue';
+import Login from '../views/auth/login.vue';
 import store from '../store';
+import axios from 'axios';
 
 Vue.use(VueRouter);
 
 const routes = [
-    
     { 
-        path: '/',
-        name: 'login',
-        component: () => import(/* webpackChunkName: "auth-login" */ '../views/auth/login.vue'),
-        meta: { layout: 'auth' }
+        path: '*',
+        redirect: '/login'
     },
 
     { 
         path: '/login',
-        name: 'Inicio',
-        component: () => import(/* webpackChunkName: "auth-login" */ '../views/auth/login.vue'),
+        component: Login,
+        name: 'Login',
         meta: { layout: 'auth' }
-    },
-
-    { 
-        path: '/create'
-        //name: 'crear',
-      //  component: () => import(/* webpackChunkName: "auth-login" */ '../views/auth/login.vue')
-        
     },
 
     //dashboard
     {
-        path: '/dashboard', 
-        name: 'Home', 
-        component: Home 
+        path: '/dashboard',  
+        component: Dashboard ,
+        name: 'Dashboard'
+        /*beforeEnter: (to, form, next) =>{
+            axios.get('/api/athenticated').then(()=>{
+                //store.commit('setLayout', 'app');
+                next();
+            }).catch(()=> {
+                return next({name: 'Inicio'});
+                //store.commit('setLayout', 'auth');
+            })
+        }*/
     },
 
     //Configuración General del sistema
     {
-        path: '/config/users',
+        path: '/general/usuarios',
         name: 'users',
         component: () => import(/* webpackChunkName: "components-users" */ '../views/config_general/users.vue')
     },
@@ -89,19 +91,19 @@ const routes = [
         path: '/pages/error404',
         name: 'error404',
         component: () => import(/* webpackChunkName: "pages-error404" */ '../views/pages/error404.vue'),
-        meta: { layout: 'auth' }
+       
     },
     {
         path: '/pages/error500',
         name: 'error500',
         component: () => import(/* webpackChunkName: "pages-error500" */ '../views/pages/error500.vue'),
-        meta: { layout: 'auth' }
+       
     },
     {
         path: '/pages/error503',
         name: 'error503',
         component: () => import(/* webpackChunkName: "pages-error503" */ '../views/pages/error503.vue'),
-        meta: { layout: 'auth' }
+        
     },
     {
         path: '/pages/sample',
@@ -109,18 +111,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "pages-sample" */ '../views/pages/sample.vue')
     },
 
-    //auth
-    {
-        path: '/auth/register',
-        name: 'register',
-        component: () => import(/* webpackChunkName: "auth-register" */ '../views/auth/register.vue'),
-        meta: { layout: 'auth' }
-    },
     {
         path: '/auth/pass-recovery',
         name: 'pass-recovery',
         component: () => import(/* webpackChunkName: "auth-pass-recovery" */ '../views/auth/pass_recovery.vue'),
-        meta: { layout: 'auth' }
+      
     },
 
     //elements
@@ -302,13 +297,23 @@ const router = new VueRouter({
     }
 });
 
+
 router.beforeEach((to, from, next) => {
     if (to.meta && to.meta.layout && to.meta.layout == 'auth') {
         store.commit('setLayout', 'auth');
     } else {
         store.commit('setLayout', 'app');
     }
+  /*  axios.get('/api/athenticated').then(()=>{
+        store.commit('setLayout', 'app');
+        next();
+    }).catch(()=> {
+        return next({name: 'Login'});
+        store.commit('setLayout', 'auth');
+    })*/
     next(true);
+
 });
+
 
 export default router;

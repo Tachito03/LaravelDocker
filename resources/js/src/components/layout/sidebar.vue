@@ -79,7 +79,7 @@
                     </a>
                     <b-collapse id="config_gral" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link tag="li" to="/config/users" @click.native="toggleMobileMenu"><a>Gestion Usuarios</a></router-link>
+                            <router-link tag="li" to="/general/usuarios" @click.native="toggleMobileMenu"><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
                             <router-link tag="li" to="/config/catalogs" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
                             <router-link tag="li" to="/config/access" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>

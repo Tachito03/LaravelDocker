@@ -19,5 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->get('/athenticated', function(){
+    return true;
+});
+
 Route::post('login', [UsuariosController::class, 'logInit']);
-Route::get('create', [UsuariosController::class, 'create']);
+Route::post('create', [UsuariosController::class, 'create']);
+Route::get('/usuarios', [UsuariosController::class, 'ObtieneUsuarios']);
+Route::post('/usuario/{id}', [UsuariosController::class, 'DesactivaUsuario']);
+
+
+

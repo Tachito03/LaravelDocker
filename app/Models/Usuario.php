@@ -12,4 +12,6 @@ class Usuario extends Model
     use Notifiable, HasApiTokens, HasFactory;
 
     //protected $fillable = ['correo', 'contrasena'];
+    protected $fillable = ['nombre','apellidos', 'foto','correo', 'contrasena','inactivo', 'id_rol'];
+    public $timestamps = false;
 }
