@@ -231,12 +231,12 @@
             async ObtieneUsuarios(){
                 const res = await axios.get('/api/usuarios');
                 this.usuarios = res.data;
-                console.log(res);
+                //console.log(res);
             },
 
             async btnEditar(id){
-                
-            }
+
+            },
 
             async btnEliminar(id){
                 this.$swal({

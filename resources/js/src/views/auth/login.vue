@@ -130,6 +130,8 @@
           
                     axios.get('/sanctum/csrf-cookie');
                     axios.post('/api/login', this.user).then((response) => {
+                        console.log(response.data);
+                        // localStorage.setItem('permission', response.data.);
                         localStorage.setItem('auth', true);
                         this.$router.push('/Dashboard');
                     }).catch((errors) =>{

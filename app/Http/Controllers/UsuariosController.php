@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 //use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Hash;
@@ -35,16 +36,6 @@ class UsuariosController extends Controller
             ]
         );*/
 
-        Usuario::where('id', '3')
-        ->update([
-                    'name' => 'Invitado', 
-                    'apellidos' => 'Invitado', 
-                    'foto' => 'foto2.png', 
-                    'correo' => 'invitado@gmail.com',
-                    'contrasena' => Hash::make('12345'),
-                    'inactivo' => '0',
-                    'id_rol' => '2'
-                ]);
 
         $options = ['correo' => $param['email'], 'inactivo' => '0'];
         $user = Usuario::where($options)->first();
@@ -55,8 +46,14 @@ class UsuariosController extends Controller
             return response()->json(['status' => 'Credenciales incorrectos'], 401);
         }
 
+        $permisos = DB::table('roles')
+        ->join('usuarios', 'roles.id', '=', 'usuarios.id_rol')
+        ->where('usuarios.id', $user->id)
+        ->get();
+
+
         return response()->json([
-            //'user' => $user,
+            'permissions' => $permisos,
             'token' => $user->createToken('appToken')->plainTextToken
         ], 200);
     }
@@ -80,6 +77,13 @@ class UsuariosController extends Controller
         ->update([
                     'inactivo' => '1'
                 ]);
+    }
+
+    public function ObtienePermisos(){
+        $permisos = Usuario::join('usuario', 'roles.id', '=', 'usuario.id_rol')
+                    ->get(['roles.*', 'usuario.']);
+
+        return permisos;
     }
 
 
