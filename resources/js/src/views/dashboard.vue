@@ -252,20 +252,16 @@
 
 <script>
     import Vue from 'vue';
-    import axios from 'axios';
     import VueApexCharts from 'vue-apexcharts';
     Vue.use(VueApexCharts);
     Vue.component('apexchart', VueApexCharts);
-
     import '@/assets/sass/widgets/widgets.scss';
 
     export default {
         metaInfo: { title: 'Dashboard Admin' },
         data() {
             return {
-                user: null,
-                currentUser: {},
-                token: localStorage.getItem('auth'),
+                token: localStorage.getItem('uuid'),
                 //Daily Sales
                 daily_sales_series: [
                     { name: 'Sales', data: [44, 55, 41, 67, 22, 43, 21] },
@@ -498,12 +494,6 @@
             }
         },
         mounted() {
-           // window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
-            axios.get('api/user').then((response) => {
-                this.user = response.data;
-            }).catch((errors) => {
-                console.log(errors);
-            })
         },
         methods: {}
     };

@@ -1,7 +1,23 @@
 import store from './store';
 import { $themeConfig } from '@themeConfig';
+import axios from 'axios';
 
 export default {
+    data() {
+        return {
+            currentUser: {},
+            token: localStorage.getItem('uuid')
+           
+        };
+    },
+    mounted() {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+        axios.get('/api/user').then((response) => {
+            this.currentUser = response.data;
+        }).catch((errors) => {
+            console.log(errors);
+        })
+    },
     init() {
         // set default styles
         let val = localStorage.getItem('dark_mode'); // light, dark, system

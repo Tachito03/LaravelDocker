@@ -74,13 +74,11 @@
                                     <td>{{ usuario.foto }}</td>
                                     <td>{{ usuario.correo }}</td>
                                     <td>
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-secondary btn-xs" title="Editar" @click="btnEditar(usuario.id)">
+                                        <div v-for="(opcion, i) in usuarioPuede" :key="i"  class="btn-group" role="group">
+                                            <a v-if="opcion.nombre_modulo == 'ajustes' && opcion.eliminar"" class="btn btn-secondary btn-xs" title="Editar" @click="btnEditar(usuario.id)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                             </a>
-                                        </div>
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-danger btn-xs" title="Editar" @click="btnEliminar(usuario.id)">
+                                            <a v-if="opcion.nombre_modulo == 'ajustes' && opcion.eliminar" class="btn btn-danger btn-xs" title="Eliminar" @click="btnEliminar(usuario.id)">
                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                             </a>
                                         </div>
@@ -89,116 +87,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <!-- Modal-->
-                        <b-modal id="registerModal" title="Register" title-tag="h4" modal-class="register-modal" footer-class="justify-content-center">
-                                <form class="mt-0">
-                                    <div class="form-group">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-user"
-                                        >
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        <b-form-input type="text" class="mb-2" placeholder="Username"></b-form-input>
-                                    </div>
-                                    <div class="form-group">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-at-sign"
-                                        >
-                                            <circle cx="12" cy="12" r="4"></circle>
-                                            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
-                                        </svg>
-                                        <b-form-input type="email" class="mb-2" placeholder="Email"></b-form-input>
-                                    </div>
-                                    <div class="form-group">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-lock"
-                                        >
-                                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                        </svg>
-                                        <b-form-input type="password" class="mb-4" placeholder="Password"></b-form-input>
-                                    </div>
-                                    <b-button variant="primary" block class="mt-2 mb-2" @click="$bvModal.hide('registerModal')">Register</b-button>
-                                </form>
-
-                                <div class="division">
-                                    <span>OR</span>
-                                </div>
-
-                                <div class="social">
-                                    <a href="javascript:void(0);" class="btn social-fb mx-1"
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-facebook"
-                                        >
-                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                        </svg>
-                                        <span class="brand-name">Facebook</span></a
-                                    >
-                                    <a href="javascript:void(0);" class="btn social-github"
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-github"
-                                        >
-                                            <path
-                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                                            ></path>
-                                        </svg>
-                                        <span class="brand-name">Github</span></a
-                                    >
-                                </div>
-
-                                <template #modal-footer>
-                                    <div class="forgot login-footer">
-                                        <span>Already have <a href="javascript:void(0);">Login</a>?</span>
-                                    </div>
-                                </template>
-                            </b-modal>
-                        <!-- End Modal-->
                     </div>
                 </div>
             </div>
@@ -220,12 +108,26 @@
         metaInfo: { title: 'Gestión de usuarios - CyP' },
         data() {
             return {
-                usuarios: []
+                permisos: localStorage.getItem('data'),
+                usuarioPuede: '',
+                usuarios: [],
+                perPage: 10,
+                currentPage: 1,
+                sortBy: "name",
+                sortDesc: false,
+                /* Number.MAX_SAFE_INTEGER = 9007199254740991 */
+                pageOptions: [5, 10, 20, 50, {
+                    value: Number.MAX_SAFE_INTEGER,
+                    text: "show all"
+                }],
+                items: []
             };
         },
 
         mounted() {
             this.ObtieneUsuarios();
+            this.usuarioPuede = JSON.parse(this.permisos);
+            console.log(this.usuarioPuede);
         },
         methods: {
             async ObtieneUsuarios(){

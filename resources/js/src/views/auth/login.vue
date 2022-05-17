@@ -60,6 +60,9 @@
                                             </div>
 
                                         </div>
+                                        <div class="field-wrapper text-center">
+                                            <h5 class="text-danger"><strong>{{ message }}</strong></h5>
+                                        </div>
                                         <div class="d-sm-flex justify-content-between">
                                             <div class="field-wrapper toggle-pass d-flex align-items-center">
                                             </div>
@@ -67,9 +70,6 @@
                                                 <b-button type="submit" variant="primary">Entrar</b-button>
                                             </div>
                                         </div>
-
-                                        
-
                                         <div class="field-wrapper">
                                             <router-link to="/auth/pass-recovery" class="forgot-pass-link">¿Olvidaste tu contraseña?</router-link>
                                         </div>
@@ -94,9 +94,6 @@
     import '@/assets/sass/authentication/auth.scss';
     import axios from 'axios';
     import { required, email, minLength } from 'vuelidate/lib/validators';
-    //import Toaster from '@meforma/vue-toaster';
-
-    //createApp(App).use(Toaster).mount('#app');
     
     export default {
         metaInfo: { title: 'Inicio de sesión' },
@@ -104,45 +101,56 @@
             return {
                 user: {
                     email: "",
-                    password: ""
+                    password: "",
+                    device_name: 'browser'
                 },
-                errors: [],
+                //errors: [],
+                message: '',
+                //permisos: {},
                 submitted: false
+                
             }
         },
 
         validations: {
             user: {
                 email: {required, email},
-                password: {required, minLength: minLength(5)}
+                password: {
+                    required, 
+                    minLength: minLength(5)
+                }
             }
         },
 
         mounted() {},
         methods: {
-            logInit(){
+           async logInit(){
                 this.submitted = true;
-
-                 this.$v.$touch();
+                this.$v.$touch();
                 if (this.$v.$invalid) {
-                    return; // stop here if form is invalid
-                }
-          
-                    axios.get('/sanctum/csrf-cookie');
-                    axios.post('/api/login', this.user).then((response) => {
-                        console.log(response.data);
-                        // localStorage.setItem('permission', response.data.);
-                        localStorage.setItem('auth', true);
-                        this.$router.push('/Dashboard');
+                    return; 
+                }       
+                    await axios.get('/sanctum/csrf-cookie');
+                    await axios.post('/api/login', this.user).then((response) => {
+
+                        localStorage.setItem('uuid', response.data.token);
+                        localStorage.setItem('data', JSON.stringify(response.data.access[0].permisos));
+                        this.$router.push({name: 'dashboard'});
                     }).catch((errors) =>{
                         this.errors = errors.response.data.errors;
-                        if(errors.response.status === 401) {
-                            alert(errors.response.data.status);
+                        var v = this;
+                        if(errors.response.status === 402) {
+                            v.message = errors.response.data.status;
+                            setTimeout(function () {
+                                v.message = '';
+                            }, 4000);
                         }else if(errors.response.status === 501){
-                            alert(errors.response.data.status);
-                        }
-                    })
-                
+                            v.message = errors.response.data.status;
+                               setTimeout(function () {
+                                    v.message = '';
+                                }, 4000);
+                            }
+                        })
             }
         }
     };

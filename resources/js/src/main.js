@@ -22,8 +22,10 @@ Vue.use(VueMeta, {
     refreshOnceOnNavigation: true
 })
 
+//Vuelidate
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
+
 
 //Sweetalert
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -54,3 +56,7 @@ new Vue({
     i18n,
     render: h => h(App)
 }).$mount('#app');
+
+
+
+

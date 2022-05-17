@@ -10,38 +10,37 @@ Vue.use(VueRouter);
 
 const routes = [
     { 
-        path: '*',
-        redirect: '/login'
+        path: '/',
+        component: Login,
+        name: 'login',
+        meta: { authRequired: false }
     },
-
     { 
+        path: '/permisos',
+        name: 'dev',
+        meta: { authRequired: false }
+    },
+    /*{ 
         path: '/login',
         component: Login,
-        name: 'Login',
-        meta: { layout: 'auth' }
-    },
+        name: 'login',
+        meta: { authRequired: false }
+    },*/
 
     //dashboard
     {
         path: '/dashboard',  
         component: Dashboard ,
-        name: 'Dashboard'
-        /*beforeEnter: (to, form, next) =>{
-            axios.get('/api/athenticated').then(()=>{
-                //store.commit('setLayout', 'app');
-                next();
-            }).catch(()=> {
-                return next({name: 'Inicio'});
-                //store.commit('setLayout', 'auth');
-            })
-        }*/
+        name: 'dashboard',
+        meta: { authRequired: true }
     },
 
     //Configuración General del sistema
     {
         path: '/general/usuarios',
         name: 'users',
-        component: () => import(/* webpackChunkName: "components-users" */ '../views/config_general/users.vue')
+        component: () => import(/* webpackChunkName: "components-users" */ '../views/config_general/users.vue'),
+        meta: { authRequired: true }
     },
     {
         path: '/config/security',
@@ -297,21 +296,33 @@ const router = new VueRouter({
     }
 });
 
+function loggedIn(){
+    return localStorage.getItem('uuid');
+}
 
 router.beforeEach((to, from, next) => {
-    if (to.meta && to.meta.layout && to.meta.layout == 'auth') {
+     //un usuario autenticado no puede ver login de nuevo
+    if(to.path == '/'){
         store.commit('setLayout', 'auth');
-    } else {
+    }else{
         store.commit('setLayout', 'app');
     }
-  /*  axios.get('/api/athenticated').then(()=>{
+
+    if (to.name === 'login' && localStorage.getItem("uuid")){
         store.commit('setLayout', 'app');
-        next();
-    }).catch(()=> {
-        return next({name: 'Login'});
-        store.commit('setLayout', 'auth');
-    })*/
-    next(true);
+        router.push({
+          name: 'dashboard'
+        })
+    } 
+    else if(to.meta.authRequired) { //Las rutas necesitan authenticarse
+        if (!localStorage.getItem("uuid")) { //Si no existe token mandamos a login
+         router.push({
+            name: 'login'
+          })
+        }
+    }
+    
+    next(true)
 
 });
 

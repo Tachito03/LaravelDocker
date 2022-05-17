@@ -235,7 +235,7 @@
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
-                            Profile
+                            {{ usuarioActual.nombre }}
                         </b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
                         <b-dropdown-item to="/apps/mailbox">
@@ -257,7 +257,7 @@
                             Inbox
                         </b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item to="/auth/login">
+                        <b-dropdown-item @click.prevent="salir">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -274,7 +274,7 @@
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>
                             </svg>
-                            Salir
+                           <span @click.prevent="salir">Salir</span> 
                         </b-dropdown-item>
                     </b-dropdown>
                 </div>
@@ -898,17 +898,23 @@
     </div>
 </template>
 <script>
+    import axios from 'axios';
     export default {
         data() {
             return {
+                usuarioActual: '',
+                token: localStorage.getItem('uuid'),
                 selectedLang: null,
                 countryList: this.$store.state.countryList
             };
         },
         mounted() {
-            this.selectedLang = this.$appSetting.toggleLanguage();
-
-            this.toggleMode();
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+            axios.get('api/user').then((response) => {
+                this.usuarioActual = response.data;
+            }).catch((errors) => {
+                console.log(errors);
+            })
         },
         methods: {
             toggleMode(mode) {
@@ -918,6 +924,16 @@
             changeLanguage(item) {
                 this.selectedLang = item;
                 this.$appSetting.toggleLanguage(item);
+            },
+
+            salir(){
+                axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+                axios.post('/api/logout').then((response)=>{
+                    localStorage.removeItem('uuid');
+                    this.$router.push({name: 'login'});
+                }).catch((errors) => {
+                    console.log(errors);
+                });
             }
         }
     };
