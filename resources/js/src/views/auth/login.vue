@@ -30,7 +30,7 @@
                                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                                 <circle cx="12" cy="7" r="4"></circle>
                                             </svg>
-                                            <input type="email" placeholder="Correo Electronico"  v-model="user.email" :class="{ 'is-invalid': submitted && $v.user.email.$error }">
+                                            <input type="email" placeholder="Correo Electronico"  v-model="user.email" :class="{ 'is-invalid': submitted && $v.user.email.$error }" value="root@cyp.com">
                                             <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
                                                 <span v-if="!$v.user.email.required">El correo es obligatorio</span>
                                                 <span v-if="!$v.user.email.email">El correo tiene formato incorrecto</span>
@@ -53,7 +53,7 @@
                                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                             </svg>
-                                            <input type="password" placeholder="Password"  v-model="user.password" :class="{ 'is-invalid': submitted && $v.user.password.$error }">
+                                            <input type="password" placeholder="Password"  v-model="user.password" :class="{ 'is-invalid': submitted && $v.user.password.$error }" value="12345">
                                             <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
                                                 <span v-if="!$v.user.password.required">La contraseña es obligatorio</span>
                                                 <span v-if="!$v.user.password.minLength">Debe tener al menos 8 caracteres</span>
