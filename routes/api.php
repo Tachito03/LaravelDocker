@@ -23,6 +23,9 @@ Route::post('/login', [UsuariosController::class, 'IniciaSesion']);
 Route::post('/permisos', [UsuariosController::class, 'Getpermisos']);
 Route::post('/logout', [UsuariosController::class, 'Salir'])->middleware('auth:sanctum');
 Route::get('/usuarios', [UsuariosController::class, 'ObtieneUsuarios']);
+Route::post('/usuario/registro', [UsuariosController::class, 'guardaUsuario']);
+Route::get('/usuario/editar/{id}', [UsuariosController::class, 'editaUsuario']);
+Route::post('/usuario/actualizar/{id}', [UsuariosController::class, 'ActualizaUsuario']);
 Route::post('/usuario/{id}', [UsuariosController::class, 'DesactivaUsuario']);
 
 

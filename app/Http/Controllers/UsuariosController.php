@@ -45,14 +45,9 @@ class UsuariosController extends Controller
         return $user;
     }
 
-    public function ActualizaUsuario(Request $request){
-        User::where('id', $request->id)
-        ->update([
-                    'name' => $request->nombre, 
-                    'apellidos' => $request->apellidos, 
-                    'foto' => $request->foto, 
-                    'correo' => $request->correo
-                ]);
+    public function editaUsuario($id){
+        $user = User::find($id);
+        return response()->json(['usuario' => $user], 200);
     }
 
     public function DesactivaUsuario($id){
@@ -67,15 +62,45 @@ class UsuariosController extends Controller
         return response()->json(['msg' => 'Token destruido']);
     }
 
-          /*User::create(
-            [
-                'nombre' => 'Super admin',
-                'apellidos' => 'admin',
-                'foto' => 'admin.png',
-                'correo' => 'admin@admin.com',
-                'contrasena' => Hash::make('12345'),
-                'inactivo' => '0',
-                'id_rol' => '1'
-            ]
-        );*/
+    public function guardaUsuario(Request $request){
+        $user = new user();
+        $user->nombre = $request->input('nombre');
+        $user->apellidos = $request->input('apellidos');
+        $user->foto = 'general.jpg';
+        $user->correo = $request->input('correo');
+        $user->contrasena = Hash::make($request->input('contrasena'));
+        $user->inactivo = '0';
+        $user->id_rol = $request->input('rol');
+        $user->created_at = date('Y-m-d H:i:s');
+        $user->save();
+
+        if($user){
+            return response()->json(['msg' => 'OK'], 200);
+        }else{
+            return response()->json(['msg' => 'Error'], 501);
+        }
+
+        //return response()->json(['msg' => $message]);
+    }
+
+    public function ActualizaUsuario(Request $request, $id){
+
+        $user = User::find($id);
+        $user->nombre = $request->input('nombre');
+        $user->apellidos = $request->input('apellidos');
+        $user->foto = 'general.jpg';
+        $user->correo = $request->input('correo');
+        $user->contrasena = Hash::make($request->input('contrasena'));
+        $user->inactivo = '0';
+        $user->id_rol = $request->input('rol');
+        $user->updated_at = date('Y-m-d H:i:s');
+        $user->update();
+
+        if($user){
+            return response()->json(['msg' => 'OK'], 200);
+        }else{
+            return response()->json(['msg' => 'Error'], 501);
+        }
+    }
+
 }

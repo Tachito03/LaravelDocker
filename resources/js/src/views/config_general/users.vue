@@ -15,8 +15,8 @@
             </ul>
         </portal>
 
-        <div class="seperator-header layout-top-spacing">
-            <h4 class="">Gestión de usuarios</h4>
+        <div v-for="(opcion, i) in usuarioPuede" :key="i" class="seperator-header layout-top-spacing">
+            <b-btn v-if="opcion.nombre_modulo == 'ajustes' && opcion.crear" class="btn btn-primary" v-b-modal.modalAlta>Agregar un nuevo usuario</b-btn>
         </div>
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
@@ -75,7 +75,7 @@
                                     <td>{{ usuario.correo }}</td>
                                     <td>
                                         <div v-for="(opcion, i) in usuarioPuede" :key="i"  class="btn-group" role="group">
-                                            <a v-if="opcion.nombre_modulo == 'ajustes' && opcion.eliminar"" class="btn btn-secondary btn-xs" title="Editar" @click="btnEditar(usuario.id)">
+                                            <a v-if="opcion.nombre_modulo == 'ajustes' && opcion.eliminar" class="btn btn-secondary btn-xs" title="Editar" @click="btnEditar(usuario.id)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                             </a>
                                             <a v-if="opcion.nombre_modulo == 'ajustes' && opcion.eliminar" class="btn btn-danger btn-xs" title="Eliminar" @click="btnEliminar(usuario.id)">
@@ -87,6 +87,61 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <b-modal id="modalAlta" title="Large" size="lg">
+                            <div class="panel-body">
+                                <b-form @submit.prevent="saveUser">
+                                    <b-form-group>
+                                        <b-input type="nombre" placeholder="Nombre" v-model="usuarioR.nombre"></b-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-input type="apellidos" placeholder="Apellidos" v-model="usuarioR.apellidos"></b-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-input type="correo" placeholder="Correo Electrónico" v-model="usuarioR.correo"></b-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-input type="password" placeholder="Password" v-model="usuarioR.contrasena"></b-input>
+                                    </b-form-group>
+                                    <b-form-group label="Rol">
+                                        <b-select value="" v-model="usuarioR.rol">
+                                            <b-select-option value="0">Selecciona un rol</b-select-option>
+                                            <b-select-option value="1">Root</b-select-option>
+                                            <b-select-option value="2">Admin</b-select-option>
+                                            <b-select-option value="3">Usuario</b-select-option>
+                                        </b-select>
+                                    </b-form-group>
+                                    <b-button type="submit" variant="primary" class="mt-4">Submit</b-button>
+                                </b-form>
+                            </div>
+                        </b-modal>
+                        <!--Modal edita-->
+                        <b-modal  ref="modalEdita" title="Actualizar Usuario" size="lg">
+                            <div class="panel-body">
+                                <b-form @submit.prevent="UpdateUser">
+                                    <b-form-group>
+                                        <b-input type="nombre" placeholder="Nombre" v-model="datausuario.nombre"></b-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-input type="apellidos" placeholder="Apellidos" v-model="datausuario.apellidos"></b-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-input type="correo" placeholder="Correo Electrónico" v-model="datausuario.correo"></b-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-input type="password" placeholder="Password" v-model="datausuario.contrasena"></b-input>
+                                    </b-form-group>
+                                    <b-form-group label="Rol">
+                                        <b-select value="" v-model="datausuario.rol">
+                                            <b-select-option value="0" selected>Selecciona un rol</b-select-option>
+                                            <b-select-option value="1">Root</b-select-option>
+                                            <b-select-option value="2">Admin</b-select-option>
+                                            <b-select-option value="3">Usuario</b-select-option>
+                                        </b-select>
+                                    </b-form-group>
+                                    <b-button type="submit" variant="primary" class="mt-4">Submit</b-button>
+                                </b-form>
+                            </div>
+                        </b-modal>
                     </div>
                 </div>
             </div>
@@ -108,9 +163,18 @@
         metaInfo: { title: 'Gestión de usuarios - CyP' },
         data() {
             return {
+                usuarioR: {
+                    nombre: "",
+                    apellidos: "",
+                    correo: "",
+                    contrasena: "",
+                    rol: "",
+                },
+                datausuario: {},
                 permisos: localStorage.getItem('data'),
                 usuarioPuede: '',
                 usuarios: [],
+                iduser: '',
                 perPage: 10,
                 currentPage: 1,
                 sortBy: "name",
@@ -129,6 +193,9 @@
             this.usuarioPuede = JSON.parse(this.permisos);
             console.log(this.usuarioPuede);
         },
+        created(){
+
+        }, 
         methods: {
             async ObtieneUsuarios(){
                 const res = await axios.get('/api/usuarios');
@@ -137,7 +204,28 @@
             },
 
             async btnEditar(id){
+                this.$refs["modalEdita"].show();
+                //console.log('Id usuario: ' + id);
+                axios.get(`/api/usuario/editar/${id}`).then((response) =>{
+                    this.datausuario = response.data.usuario;
+                    console.log('Data user: ',  this.datausuario.id);
+                })
 
+            },
+            async UpdateUser(){
+                axios.post(`/api/usuario/actualizar/${this.datausuario.id}`, this.datausuario).then((response) =>{
+                    console.log('Data user: ', response);
+                })
+
+            },
+
+            async saveUser(){
+                await axios.post('/api/usuario/registro', this.usuarioR).then((response) => {
+                        console.log(response.data);
+                        //this.$router.push({name: 'dashboard'});
+                    }).catch((errors) =>{
+                        this.errors = errors.response.data.errors;
+                    })
             },
 
             async btnEliminar(id){
