@@ -15,18 +15,20 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/login', [UsuariosController::class, 'StartLogin']);
+Route::post('/logout', [UsuariosController::class, 'logout'])->middleware('auth:sanctum');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [UsuariosController::class, 'IniciaSesion']);
-Route::post('/permisos', [UsuariosController::class, 'Getpermisos']);
-Route::post('/logout', [UsuariosController::class, 'Salir'])->middleware('auth:sanctum');
-Route::get('/usuarios', [UsuariosController::class, 'ObtieneUsuarios']);
-Route::post('/usuario/registro', [UsuariosController::class, 'guardaUsuario']);
-Route::get('/usuario/editar/{id}', [UsuariosController::class, 'editaUsuario']);
-Route::post('/usuario/actualizar/{id}', [UsuariosController::class, 'ActualizaUsuario']);
-Route::post('/usuario/{id}', [UsuariosController::class, 'DesactivaUsuario']);
-
-
-
+Route::group(['prefix' => 'users', 'middleware' => 'auth:sanctum'], function(){
+    Route::get('/roles', [UsuariosController::class, 'getAllRols']);
+    Route::get('/lista', [UsuariosController::class, 'getUsers']); //for datatable
+    Route::get('/accesos', [UsuariosController::class, 'getAccesos']);
+    Route::post('/add', [UsuariosController::class, 'addUser']);
+    Route::get('/edit/{id}', [UsuariosController::class, 'editUser']);
+    Route::post('/update/{id}', [UsuariosController::class, 'updateUser']);
+    Route::post('/delete/{id}', [UsuariosController::class, 'deleteUser']);
+});

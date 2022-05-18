@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Rol;
+use App\Models\Acceso;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Hash;
 
 class UsuariosController extends Controller
 {
-    public function IniciaSesion(Request $request){
+    public function StartLogin(Request $request){
 
        $param = $request->validate([
             'email' => 'required|email',
@@ -21,48 +22,84 @@ class UsuariosController extends Controller
 
         $user = User::where(['correo' => $param['email'], 'inactivo' => '0'])->first();
 
-        if(!$user){
-            return response()->json(['status' => 'Usuario no existe'], 501);
-        }else if(!Hash::check($param['password'], $user->contrasena)){
-            return response()->json(['status' => 'Credenciales incorrectos'], 402);
+        if($user){
+           $token = $user->createToken($request->device_name)->plainTextToken;
+           $message = 'Success'; 
+           $status  = '200';
+           $this->logAcceso($status, $user->id);
+
+        }else if(!$user){
+            $token = null;
+            $message = 'No encontramos este usuario';
+            $status = '501';
+        }
+        else if(!Hash::check($param['password'], $user->contrasena)){
+            $token = null;
+            $message = 'Credenciales incorrectos';
+            $status = '402';
+            $this->logAcceso($status, $user->id);
         }
 
         $roles = Rol::select('permisos')
         ->join('users', 'users.id_rol', '=', 'roles.id')
         ->where('users.id', $user->id)
         ->get();
-        
-        $token = $user->createToken($request->email)->plainTextToken;
 
-        return  response()->json(['token' => $user->createToken($request->device_name)->plainTextToken, 
-                                'access' => $roles],
-                                 200);
+        return  response()->json(['token' => $token , 
+                                'access' => $roles, 'status' => $message],
+                                 $status);
        
     }
 
-    public function ObtieneUsuarios(){
-        $user = User::where('inactivo', '=', '0')->get();
-        return $user;
+    public function getUsers(){
+        $user = DB::table('users')
+                    ->join('roles', 'users.id_rol', '=', 'roles.id')
+                    ->select('users.id','users.nombre', 'users.apellidos', 'users.correo','users.id_rol','roles.descripcion as rol',)
+                    ->where('users.inactivo', '=', '0')
+                    ->get();
+        return response()->json(['list' => $user], 200);
     }
 
-    public function editaUsuario($id){
-        $user = User::find($id);
-        return response()->json(['usuario' => $user], 200);
+    public function getAllRols(){
+        $roles = DB::table('roles')
+                    ->select('roles.id','roles.descripcion')
+                    ->get();
+        return response()->json(['roles' => $roles], 200);
     }
 
-    public function DesactivaUsuario($id){
+    public function deleteUser($id){
         User::where('id', $id)
         ->update([
                     'inactivo' => '1'
                 ]);
     }
 
-    public function Salir(Request $request){
+    public function logAcceso($status, $id){
+        $log = new Acceso();
+        $log->ip = $_SERVER['REMOTE_ADDR'];
+        $log->estado = $status;
+        $log->id_usuario = $id;
+        $log->fechaacceso = date('Y-m-d H:i:s');
+        $log->save();
+    }
+
+    public function getAccesos(){
+        $user = DB::table('registroaccesos')
+        ->join('users', 'users.id', '=', 'registroaccesos.id_usuario')
+        ->select('registroaccesos.*','users.nombre', 'users.correo')
+        ->where('users.inactivo', '=', '0')
+        ->get();
+        
+        return response()->json(['accesos' => $user], 200);
+    }
+
+    public function logout(Request $request){
         $request->user()->currentAccessToken()->delete();
         return response()->json(['msg' => 'Token destruido']);
     }
 
-    public function guardaUsuario(Request $request){
+    public function addUser(Request $request){
+
         $user = new user();
         $user->nombre = $request->input('nombre');
         $user->apellidos = $request->input('apellidos');
@@ -70,7 +107,7 @@ class UsuariosController extends Controller
         $user->correo = $request->input('correo');
         $user->contrasena = Hash::make($request->input('contrasena'));
         $user->inactivo = '0';
-        $user->id_rol = $request->input('rol');
+        $user->id_rol = $request->input('id_rol');
         $user->created_at = date('Y-m-d H:i:s');
         $user->save();
 
@@ -83,7 +120,7 @@ class UsuariosController extends Controller
         //return response()->json(['msg' => $message]);
     }
 
-    public function ActualizaUsuario(Request $request, $id){
+    public function updateUser(Request $request, $id){
 
         $user = User::find($id);
         $user->nombre = $request->input('nombre');
@@ -92,7 +129,7 @@ class UsuariosController extends Controller
         $user->correo = $request->input('correo');
         $user->contrasena = Hash::make($request->input('contrasena'));
         $user->inactivo = '0';
-        $user->id_rol = $request->input('rol');
+        $user->id_rol = $request->input('id_rol');
         $user->updated_at = date('Y-m-d H:i:s');
         $user->update();
 

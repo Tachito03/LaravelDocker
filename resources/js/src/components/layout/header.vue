@@ -930,6 +930,7 @@
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
                 axios.post('/api/logout').then((response)=>{
                     localStorage.removeItem('uuid');
+                    localStorage.removeItem('data');
                     this.$router.push({name: 'login'});
                 }).catch((errors) => {
                     console.log(errors);
