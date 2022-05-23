@@ -7,7 +7,7 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Ajustes generales</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Gestión de usuarios</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Roles existentes</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -16,7 +16,7 @@
         </portal>
         
         <div class="seperator-header layout-top-spacing text-right">
-            <b-btn @click="btnNuevo()" class="btn btn-primary" >Nuevo usuario</b-btn>
+            <router-link  to="/ajustes/rol/nuevo" ><b-btn class="btn btn-primary"> Agregar nuevo rol</b-btn></router-link>
         </div>
 
         <div class="row layout-top-spacing">
@@ -25,7 +25,7 @@
                     <div class="custom-table">
                         <div class="table-header">
                             <div class="d-flex align-items-center">
-                                <span>Results :</span>
+                                <span>Resultado :</span>
                                 <span class="ml-2">
                                     <b-select v-model="table_option.page_size" class="h-auto">
                                         <b-select-option value="5">5</b-select-option>
@@ -36,7 +36,7 @@
                                 </span>
                             </div>
                             <div class="header-search">
-                                <b-input v-model="table_option.search_text" size="sm" placeholder="Search..." />
+                                <b-input v-model="table_option.search_text" size="sm" placeholder="Buscar..." />
                                 <div class="search-image">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -72,20 +72,18 @@
                             <template #cell(salary)="row"> ${{ row.item.salary }} </template>
                             <template #cell(status)="row">
                                 <div v-b-tooltip class="t-dot" :class="row.value.class" :title="row.value.tooltip"></div>
-
                             </template>
                             <template #cell(action)="row">
-                                <a size="sm" variant="primary" @click="btnEdit(row.item)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                </a>
-                                <a size="sm" variant="primary" @click="btnDelete(row.item)">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-x"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
-                                </a>
+                                <router-link :to="{name:'editarrol',params:{id:row.item.id}}" >
+                                    <a size="sm" variant="primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                    </a>
+                                </router-link>
                             </template>
                         </b-table>
 
                         <div class="table-footer">
-                            <div class="dataTables_info">Showing {{ meta.total_items ? meta.start_index + 1 : 0 }} to {{ meta.end_index + 1 }} of {{ meta.total_items }}</div>
+                            <div class="dataTables_info">Mostrando {{ meta.total_items ? meta.start_index + 1 : 0 }} to {{ meta.end_index + 1 }} of {{ meta.total_items }}</div>
                             <div class="paginating-container pagination-solid flex-column align-items-right">
                                 <b-pagination
                                     v-model="table_option.current_page"
@@ -124,73 +122,7 @@
                                 </b-pagination>
                             </div>
                         </div>
-                        
                     </div>
-                    <!-- Modal Register-->
-                    <b-modal  ref="modalAlta" title="Actualizar Usuario" size="lg">
-                        <div class="panel-body">
-                            <b-form @submit.prevent="agregarUsuario">
-                                <b-form-group>
-                                    <b-input type="nombre" placeholder="Nombre" v-model="usuarioAdd.nombre"></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="apellidos" placeholder="Apellidos" v-model="usuarioAdd.apellidos" ></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="correo" placeholder="Correo Electrónico" v-model="usuarioAdd.correo" ></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="password" placeholder="Nueva contraseña" v-model="usuarioAdd.contrasena" ></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="password" placeholder="Confirma la contraseña" v-model="usuarioAdd.contrasena_conf"></b-input>
-                                </b-form-group>
-                                <b-form-group label="Asignar un rol">
-                                    <b-select value="Hola"  v-model="usuarioAdd.id_rol">
-                                         <b-select-option :value="null">Selecciona un rol</b-select-option>
-                                        <b-select-option v-for="(opciones, indexOpt) in selected.options" 
-                                        :key="indexOpt" :value="opciones.id">
-                                          {{ opciones.descripcion }}
-                                        </b-select-option>
-                                    </b-select>
-                                </b-form-group>
-                                    <b-button type="submit" variant="primary" class="mt-4">Actualizar</b-button>
-                            </b-form>
-                        </div>
-                    </b-modal>
-                    <!-- End Modal Register-->
-                    <!-- Modal Editar-->
-                    <b-modal  ref="modalEdita" title="Actualizar Usuario" size="lg">
-                        <div class="panel-body">
-                            <b-form @submit.prevent="UpdateUser">
-                                <b-form-group>
-                                    <b-input type="nombre" placeholder="Nombre" v-model="usuarios.nombre"></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="apellidos" placeholder="Apellidos" v-model="usuarios.apellidos" ></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="correo" placeholder="Correo Electrónico" v-model="usuarios.correo" ></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="password" placeholder="Nueva contraseña" ></b-input>
-                                </b-form-group>
-                                <b-form-group>
-                                    <b-input type="password" placeholder="Confirma la contraseña" ></b-input>
-                                </b-form-group>
-                                <b-form-group label="Asignar un rol">
-                                    <b-select value=""  v-model="selected.id_rol">
-                                        <b-select-option v-for="(opciones, indexOpt) in selected.options" 
-                                        :key="indexOpt" :value="opciones.id">
-                                          {{ opciones.descripcion }}
-                                        </b-select-option>
-                                    </b-select>
-                                </b-form-group>
-                                    <b-button type="submit" variant="primary" class="mt-4">Actualizar</b-button>
-                            </b-form>
-                        </div>
-                    </b-modal>
-                    <!-- End Modal edita-->
                 </div>
             </div>
         </div>
@@ -200,33 +132,15 @@
 
 <script>
     import axios from 'axios';
-    import '@/assets/sass/scrollspyNav.scss';
-    import '@/assets/sass/components/custom-sweetalert.scss';
-    import '@/assets/sass/components/custom-modal.scss';
 
     export default {
         metaInfo: { title: 'Bootstrap Multiple Tables' },
         data() {
             return {
-                //table 1
                 items: [],
                 columns: [],
                 table_option: { total_rows: 0, current_page: 1, page_size: 10, search_text: '' },
-                meta: {},
-                usuarios: {},
-                selected: {
-                    id_rol: null,
-                    selected: null,
-                    options: []
-                    },
-                usuarioAdd: {
-                    nombre: '',
-                    apellidos: '',
-                    correo: '',
-                    contrasena: '',
-                    contrasena_conf: '',
-                    id_rol: ''
-                }
+                meta: {}
             };
         },
         watch: {
@@ -238,28 +152,22 @@
             }
         },
         mounted() {
-            this.ObtieneListaUsuarios(); 
-            this.dataTable();
-            this.obtieneRoles();
+            this.ObtieneRoles();
         },
         methods: {
-            async ObtieneListaUsuarios(){
-                axios.get('/api/users/lista').then((response) =>{
-                    this.items = response.data.list;
-                })
-
-            },
-            dataTable() {
+            ObtieneRoles() {
                 this.columns = [
-                    { key: 'id', label: 'No', sortable: true },
-                    { key: 'nombre', label: 'Nombre', sortable: true },
-                    { key: 'apellidos', label: 'Apellidos', sortable: true },
-                    { key: 'correo', label: 'Email', sortable: true },
-                    { key: 'rol', label: 'Rol', sortable: true },
-                    { key: 'action', label: 'Acciones', class: 'text-center' },
+                    { key: 'id', label: 'No', sortable: false },
+                    { key: 'descripcion', label: 'Nombre del rol', sortable: false },
+                    //{ key: 'permisos', label: 'Permisos', sortable: false },
+                    { key: 'created_at', label: 'Fecha creación', sortable: false },
+                    { key: 'action', label: 'Acciones', sortable: false },
                 ];
-
-                this.table_option.total_rows = this.items.length;
+                
+                 axios.get('/api/catalogs/roles').then((response) =>{
+                    this.items = response.data.roles;
+                     this.table_option.total_rows = this.items.length;
+                });
                 this.get_meta();
             },
             on_filtered(filtered_items) {
@@ -275,7 +183,7 @@
                 var totalPages = this.table_option.page_size < 1 ? 1 : Math.ceil(this.table_option.total_rows / this.table_option.page_size);
                 totalPages = Math.max(totalPages || 0, 1);
 
-                var maxSize = 5;
+                var maxSize = 15;
                 var isMaxSized = typeof maxSize !== 'undefined' && maxSize < totalPages;
                 if (isMaxSized) {
                     startPage = Math.max(this.table_option.current_page - Math.floor(maxSize / 2), 1);
@@ -304,36 +212,6 @@
                     end_index: endIndex,
                     pages: pages
                 };
-            },
-            async btnNuevo(){
-                this.$refs["modalAlta"].show();
-            },
-            async btnEdit(item) {
-                this.$refs["modalEdita"].show();
-                this.usuarios = item;
-            },
-            async UpdateUser(){
-                axios.post(`/api/users/update/${this.usuarios.id}`, this.usuarios).then((response) =>{
-                    console.log('Data user: ', response);
-                });
-            },
-            async agregarUsuario(){
-                axios.post('/api/users/add', this.usuarioAdd).then((response) => {
-                        console.log(response.data);
-                        
-                    }).catch((errors) =>{
-                        this.errors = errors.response.data.errors;
-                    })
-            }, 
-            async btnDelete(item) {
-                //alert('ID: ' + item.id + ', Name: ' + item.nombre);
-                
-            },
-
-            async obtieneRoles(){
-                axios.get('/api/users/roles').then((response) =>{
-                     this.selected.options = response.data.roles;
-                });
             }
      
         }

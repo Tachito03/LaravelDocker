@@ -15,17 +15,6 @@ const routes = [
         name: 'login',
         meta: { authRequired: false }
     },
-    { 
-        path: '/permisos',
-        name: 'dev',
-        meta: { authRequired: false }
-    },
-    /*{ 
-        path: '/login',
-        component: Login,
-        name: 'login',
-        meta: { authRequired: false }
-    },*/
 
     //dashboard
     {
@@ -35,28 +24,49 @@ const routes = [
         meta: { authRequired: true }
     },
 
-    //Configuración General del sistema
+    //Ajustes generales del sistema
     {
-        path: '/general/usuarios',
-        name: 'users',
-        component: () => import(/* webpackChunkName: "components-users" */ '../views/config_general/users.vue'),
+        path: '/ajustes/gestion/usuarios',
+        name: 'usuarios',
+        component: () => import(/* webpackChunkName: "components-users" */ '../views/ajustes_generales/usuarios.vue'),
+        meta: { authRequired: true }
+    },
+    {
+        path: '/ajustes/historial/accesos',
+        name: 'accesos',
+        component: () => import(/* webpackChunkName: "components-access" */ '../views/ajustes_generales/historial_accesos.vue'),
+        meta: { authRequired: true }
+    },
+    {
+        path: '/ajustes/historial/modificaciones',
+        name: 'modificaciones',
+        component: () => import(/* webpackChunkName: "components-access" */ '../views/ajustes_generales/historial_modificaciones.vue'),
+        meta: { authRequired: true }
+    },
+    {
+        path: '/ajustes/rol/lista',
+        name: 'listaroles',
+        component: () => import(/* webpackChunkName: "components-catalogs" */ '../views/ajustes_generales/cat_roles/listaRoles.vue'),
+        meta: { authRequired: true }
+    },
+    {
+        path: '/ajustes/rol/nuevo',
+        name: 'nuevorol',
+        component: () => import(/* webpackChunkName: "components-catalogs" */ '../views/ajustes_generales/cat_roles/agregarRol.vue'),
+        meta: { authRequired: true }
+    },
+    {
+        path: '/ajustes/rol/editar/:id',
+        name: 'editarrol',
+        component: () => import(/* webpackChunkName: "components-catalogs" */ '../views/ajustes_generales/cat_roles/editarRol.vue'),
         meta: { authRequired: true }
     },
     {
         path: '/config/security',
         name: 'security',
-        component: () => import(/* webpackChunkName: "components-security" */ '../views/config_general/security.vue')
+        component: () => import(/* webpackChunkName: "components-security" */ '../views/ajustes_generales/security.vue')
     },
-    {
-        path: '/config/catalogs',
-        name: 'catalogs',
-        component: () => import(/* webpackChunkName: "components-catalogs" */ '../views/config_general/catalogs.vue')
-    },
-    {
-        path: '/config/access',
-        name: 'access',
-        component: () => import(/* webpackChunkName: "components-access" */ '../views/config_general/access.vue')
-    },
+
 
     //components
     {

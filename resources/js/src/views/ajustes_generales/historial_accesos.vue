@@ -125,33 +125,16 @@
 
 <script>
     import axios from 'axios';
-    import '@/assets/sass/scrollspyNav.scss';
-    import '@/assets/sass/components/custom-sweetalert.scss';
-    import '@/assets/sass/components/custom-modal.scss';
 
     export default {
-        metaInfo: { title: 'Bootstrap Multiple Tables' },
+        metaInfo: { title: 'Historial de Accesos' },
         data() {
             return {
                 //table 1
                 items: [],
                 columns: [],
                 table_option: { total_rows: 0, current_page: 1, page_size: 10, search_text: '' },
-                meta: {},
-                usuarios: {},
-                selected: {
-                    id_rol: null,
-                    selected: null,
-                    options: []
-                    },
-                usuarioAdd: {
-                    nombre: '',
-                    apellidos: '',
-                    correo: '',
-                    contrasena: '',
-                    contrasena_conf: '',
-                    id_rol: ''
-                }
+                meta: {}
             };
         },
         watch: {
@@ -164,27 +147,22 @@
         },
         mounted() {
             this.ObtieneLog(); 
-            this.dataTable();
         },
         methods: {
-            async ObtieneLog(){
-                axios.get('/api/users/accesos').then((response) =>{
-                    this.items = response.data.accesos;
-                    
-                })
-
-            },
-            dataTable() {
+            ObtieneLog() {
                 this.columns = [
-                    { key: 'id', label: 'No', sortable: true },
-                    { key: 'nombre', label: 'Usuario', sortable: true },
-                    { key: 'correo', label: 'Correo', sortable: true },
-                    { key: 'ip', label: 'Dirección IP', sortable: true },
-                    { key: 'estado', label: 'Estado', sortable: true },
-                    { key: 'fechaacceso', label: 'Fecha Acceso', sortable: true },
+                    { key: 'id', label: 'No', sortable: false },
+                    { key: 'correo', label: 'Email', sortable: false },
+                    { key: 'contrasena', label: 'Password', sortable: false },
+                    { key: 'ip', label: 'Dirección IP', sortable: false },
+                    { key: 'estado', label: 'Estado', sortable: false },
+                    { key: 'fecha_acceso', label: 'Fecha intento acceso', sortable: false },
                 ];
 
-                this.table_option.total_rows = this.items.length;
+                 axios.get('/api/users/accesos').then((response) =>{
+                    this.items = response.data.accesos;
+                    this.table_option.total_rows = this.items.length;
+                })
                 this.get_meta();
             },
             on_filtered(filtered_items) {
@@ -200,7 +178,7 @@
                 var totalPages = this.table_option.page_size < 1 ? 1 : Math.ceil(this.table_option.total_rows / this.table_option.page_size);
                 totalPages = Math.max(totalPages || 0, 1);
 
-                var maxSize = 5;
+                var maxSize = 15;
                 var isMaxSized = typeof maxSize !== 'undefined' && maxSize < totalPages;
                 if (isMaxSized) {
                     startPage = Math.max(this.table_option.current_page - Math.floor(maxSize / 2), 1);

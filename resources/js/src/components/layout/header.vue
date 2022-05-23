@@ -898,20 +898,74 @@
     </div>
 </template>
 <script>
+    import '@/assets/sass/components/custom-sweetalert.scss';
+    //import axios from 'axios';
+
+    import Vue from 'vue'
+    import IdleVue from "idle-vue"
     import axios from 'axios';
+    //import store from './store'
+
+    const eventsHub = new Vue();
+
+    //5 * 60 = segundos (minutos * 60 segundos)
+    //segundos * 100 = milisegundos (segundos * 100)
+    Vue.use(IdleVue, {
+        eventEmitter: eventsHub,
+       // store,
+        idleTime: 1200000000, // 120000 => 2 minutos
+        startAtIdle: false
+    });
+
     export default {
         data() {
             return {
                 usuarioActual: '',
                 token: localStorage.getItem('uuid'),
                 selectedLang: null,
-                countryList: this.$store.state.countryList
+                countryList: this.$store.state.countryList,
             };
+        },
+        onIdle() {
+            if(this.$route.fullPath != '/'){
+                let timerInterval;
+                this.$swal({
+                    title: 'Se cerrará tu sesión por inactividad!!',
+                    html: '<br>Redirigiendo al inicio de sesión en <strong></strong> segundos.',
+                    timer: 10000,
+                    padding: '3em',
+                    timerProgressBar: true,
+                        didOpen: () => {
+                            this.$swal.showLoading();
+                            const b = this.$swal.getHtmlContainer().querySelector('strong');
+                            timerInterval = setInterval(() => {
+                                b.textContent = (this.$swal.getTimerLeft() / 1000).toFixed(0);
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                            this.salir();
+                        }
+                    }).then(function(result) {
+                        if (result.dismiss === this.$swal.DismissReason.timer) {
+                            console.log('Cerrado por el temporizador');
+                        }
+                });
+            }else{
+                console.log('Estamos en el login no mostrar alerta');
+            }
+        },
+        onActive() {
+            console.log('usuario activo');
+        },
+        computed: {
+            
         },
         mounted() {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
             axios.get('api/user').then((response) => {
                 this.usuarioActual = response.data;
+                console.log(this.usuarioActual);
             }).catch((errors) => {
                 console.log(errors);
             })

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegistroaccesosTable extends Migration
+class CreateHistorialCambiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateRegistroaccesosTable extends Migration
      */
     public function up()
     {
-        Schema::create('registroaccesos', function (Blueprint $table) {
+        Schema::create('historial_cambios', function (Blueprint $table) {
             $table->id();
-            $table->string('ip', 20);
-            $table->string('estado', 10);
+            $table->string('responsable', 25);
             $table->foreignId('id_usuario')
             ->constrained('users');
-            $table->datetime('fechaacceso')->nullable();
-            //$table->timestamps();
+            $table->datetime('fecha');
+            
         });
     }
 
@@ -31,6 +30,6 @@ class CreateRegistroaccesosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registroaccesos');
+        Schema::dropIfExists('historial_cambios');
     }
 }

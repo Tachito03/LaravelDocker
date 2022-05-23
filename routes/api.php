@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\CatalogosController;
+use App\Http\Controllers\GestionusuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +26,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'users', 'middleware' => 'auth:sanctum'], function(){
-    Route::get('/roles', [UsuariosController::class, 'getAllRols']);
-    Route::get('/lista', [UsuariosController::class, 'getUsers']); //for datatable
-    Route::get('/accesos', [UsuariosController::class, 'getAccesos']);
-    Route::post('/add', [UsuariosController::class, 'addUser']);
-    Route::get('/edit/{id}', [UsuariosController::class, 'editUser']);
-    Route::post('/update/{id}', [UsuariosController::class, 'updateUser']);
-    Route::post('/delete/{id}', [UsuariosController::class, 'deleteUser']);
+    Route::get('/roles', [GestionusuarioController::class, 'getAllRols']);
+    Route::get('/lista', [GestionusuarioController::class, 'getUsers']); //for datatable
+    Route::get('/accesos', [UsuariosController::class, 'HistorialAccesos']);
+    Route::get('/historial', [UsuariosController::class, 'HistorialModificaciones']);
+    Route::post('/add', [GestionusuarioController::class, 'addUser']);
+    Route::get('/edit/{id}', [GestionusuarioController::class, 'editUser']);
+    Route::post('/update/{id}', [GestionusuarioController::class, 'updateUser']);
+    Route::post('/delete/{id}', [GestionusuarioController::class, 'deleteUser']);
+});
+
+Route::group(['prefix' => 'catalogs', 'middleware' => 'auth:sanctum'], function(){
+    Route::get('/roles', [CatalogosController::class, 'getRoles']);
+    Route::post('/add/rol', [CatalogosController::class, 'saveRol']);
+    Route::get('/edit/rol/{id}', [CatalogosController::class, 'getRol']);
+    Route::post('/update/rol/{id}', [CatalogosController::class, 'updateRol']);
 });

@@ -7,13 +7,16 @@
     // layouts
     import appLayout from './layouts/app-layout.vue';
     import authLayout from './layouts/auth-layout.vue';
-
+    //import '@/assets/sass/components/custom-sweetalert.scss';
     import '@/assets/sass/app.scss';
 
     export default {
         metaInfo: {
-            title: 'Admin',
+            title: 'Administrador',
             titleTemplate: '%s | System CYP'
+        },
+        data() {
+            return {};
         },
         components: {
             app: appLayout,
@@ -23,9 +26,6 @@
             layout() {
                 return this.$store.getters.layout;
             }
-        },
-        data() {
-            return {};
         },
         mounted() {},
         methods: {}

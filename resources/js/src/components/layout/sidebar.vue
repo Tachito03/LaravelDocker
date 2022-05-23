@@ -31,10 +31,37 @@
                     </a>
                     <b-collapse id="ajustes" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link v-if="opcion.nombre_modulo == 'ajustes' && opcion.lista"  tag="li" to="/general/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
+                            <router-link v-if="opcion.nombre_modulo == 'ajustes' && opcion.lista"  tag="li" to="/ajustes/gestion/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
-                            <router-link tag="li" to="/config/catalogs" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
-                            <router-link tag="li" to="/config/access" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
+                            <router-link tag="li" to="/ajustes/historial/accesos" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
+                            <router-link tag="li" to="/ajustes/historial/modificaciones" @click.native="toggleMobileMenu"><a>Historial de Modificaciones</a></router-link>
+                            <li>
+                                <a href="#catalogs" v-b-toggle class="dropdown-toggle" @click.prevent>
+                                    Catálogos generales
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-chevron-right"
+                                    >
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </a>
+                                <b-collapse id="catalogs">
+                                    <ul class="collapse list-unstyled sub-submenu show" data-parent="#app">
+                                        <router-link tag="li" to="/ajustes/rol/lista" @click.native="toggleMobileMenu"><a>Roles</a></router-link>
+                                        <router-link tag="li" to="/apps/invoice/preview" @click.native="toggleMobileMenu"><a>Estado OC</a></router-link>
+                                        <router-link tag="li" to="/apps/invoice/add" @click.native="toggleMobileMenu"><a>Estado Proyectos</a></router-link>
+                                        <router-link tag="li" to="/apps/invoice/fg" @click.native="toggleMobileMenu"><a>Ingreso Reportado</a></router-link>
+                                    </ul>
+                                </b-collapse>
+                            </li>
                         </ul>
                     </b-collapse>
                 </li>
@@ -68,8 +95,8 @@
                         <ul class="collapse submenu list-unstyled show">
                             <router-link v-if="opcion.nombre_modulo == 'compras' && opcion.reporte"  tag="li" to="/general/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
-                            <router-link tag="li" to="/config/catalogs" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
-                            <router-link tag="li" to="/config/access" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
+                            <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
+                            <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
                         </ul>
                     </b-collapse>
                 </li>
@@ -100,10 +127,10 @@
                     </a>
                     <b-collapse id="proyectos" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link v-if="opcion.nombre_modulo == 'proyectos' && opcion.reporte"  tag="li" to="/general/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
+                            <router-link v-if="opcion.nombre_modulo == 'proyectos' && opcion.reporte"  tag="li" to="/config/security" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
-                            <router-link tag="li" to="/config/catalogs" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
-                            <router-link tag="li" to="/config/access" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
+                            <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
+                            <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
                         </ul>
                     </b-collapse>
                 </li>
