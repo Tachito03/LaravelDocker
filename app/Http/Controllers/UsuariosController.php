@@ -32,8 +32,8 @@ class UsuariosController extends Controller
             $this->registraAcceso($request->email, $request->password, 'Credenciales Incorrectos');
 
             //prueba envio de correo
-            $mail = new SendMail($request->all());
-            Mail::to('eustacio.bautista@grupoperti.com.mx')->send($mail);
+            //$mail = new SendMail($request->all());
+            //Mail::to('eustacio.bautista@grupoperti.com.mx')->send($mail);
             return response()->json(['message' => 'Credenciales incorrectos'], 501);
                 
         }else{
