@@ -52,6 +52,15 @@
                                         </b-form-row>
                                         <b-form-row class="col-12">
                                             <b-form-group class="col-lg-3 col-md-4 col-6">
+                                                <h6><strong>Ajustes generales</strong></h6>
+                                                <b-checkbox variant="success" class="checkbox-success" value="1" v-model="roles.permisos.ajustes">Ver módulo</b-checkbox>
+                                                <b-checkbox variant="success" class="checkbox-success" value="crear" v-model="roles.permisos.ajustes">Crear</b-checkbox>
+                                                <b-checkbox variant="success" class="checkbox-success" value="actualizar" v-model="roles.permisos.ajustes">Editar</b-checkbox>
+                                                <b-checkbox variant="success" class="checkbox-success" value="eliminar" v-model="roles.permisos.ajustes">Eliminar</b-checkbox>
+                                                <b-checkbox variant="success" class="checkbox-success" value="submenus" v-model="roles.permisos.ajustes">Sub menús</b-checkbox>
+                                                <b-checkbox variant="success" class="checkbox-success" value="reportes" v-model="roles.permisos.ajustes">Reportes</b-checkbox>
+                                            </b-form-group>
+                                            <b-form-group class="col-lg-3 col-md-4 col-6">
                                                 <h6><strong>Ordenes Compras</strong></h6>
                                                 <b-checkbox variant="success" class="checkbox-success" value="1" v-model="roles.permisos.compras">Ver módulo</b-checkbox>
                                                 <b-checkbox variant="success" class="checkbox-success" value="crear" v-model="roles.permisos.compras">Crear</b-checkbox>
@@ -75,6 +84,8 @@
                                                 <b-checkbox variant="success" class="checkbox-success" value="eliminar" v-model="roles.permisos.clientes">Eliminar</b-checkbox>
                                                 <b-checkbox variant="success" class="checkbox-success" value="reportes" v-model="roles.permisos.clientes">Reportes</b-checkbox>
                                             </b-form-group>
+                                        </b-form-row>
+                                        <b-form-row class="col-12">
                                             <b-form-group class="col-lg-3 col-md-4 col-6">
                                                 <h6><strong>Ingresos</strong></h6>
                                                 <b-checkbox variant="success" class="checkbox-success" value="4" v-model="roles.permisos.ingresos">Ver módulo</b-checkbox>
@@ -83,8 +94,6 @@
                                                 <b-checkbox variant="success" class="checkbox-success" value="eliminar" v-model="roles.permisos.ingresos">Eliminar</b-checkbox>
                                                 <b-checkbox variant="success" class="checkbox-success" value="reportes" v-model="roles.permisos.ingresos">Reportes</b-checkbox>
                                             </b-form-group>
-                                        </b-form-row>
-                                        <b-form-row class="col-12">
                                             <b-form-group class="col-lg-3 col-md-4 col-6">
                                                 <h6><strong>Flujo</strong></h6>
                                                 <b-checkbox variant="success" class="checkbox-success" value="5" v-model="roles.permisos.flujo">Ver módulo</b-checkbox>
@@ -109,6 +118,8 @@
                                                 <b-checkbox variant="success" class="checkbox-success" value="eliminar" v-model="roles.permisos.sistemas">Eliminar</b-checkbox>
                                                 <b-checkbox variant="success" class="checkbox-success" value="reportes" v-model="roles.permisos.sistemas">Reportes</b-checkbox>
                                             </b-form-group>
+                                        </b-form-row>
+                                        <b-form-row class="col-12">
                                             <b-form-group class="col-lg-3 col-md-4 col-6">
                                                 <h6><strong>Soporte</strong></h6>
                                                 <b-checkbox variant="success" class="checkbox-success" value="8" v-model="roles.permisos.soporte">Ver módulo</b-checkbox>
@@ -117,8 +128,6 @@
                                                 <b-checkbox variant="success" class="checkbox-success" value="eliminar" v-model="roles.permisos.soporte">Eliminar</b-checkbox>
                                                 <b-checkbox variant="success" class="checkbox-success" value="reportes" v-model="roles.permisos.soporte">Reportes</b-checkbox>
                                             </b-form-group>
-                                        </b-form-row>
-                                        <b-form-row class="col-12">
                                             <b-form-group class="col-lg-3 col-md-4 col-6">
                                                 <h6><strong>Vehículos</strong></h6>
                                                 <b-checkbox variant="success" class="checkbox-success" value="9" v-model="roles.permisos.vehiculos">Ver módulo</b-checkbox>
@@ -175,7 +184,7 @@
     import { required} from 'vuelidate/lib/validators';
 
     export default {
-        metaInfo: { title: 'Roles y Permisos' },
+        metaInfo: { title: 'Alta roles y permisos' },
         components: {
             highlight
         },
@@ -186,7 +195,7 @@
                 roles: {
                    descripcion: '',
                    permisos: {
-                       compras: [],proyectos: [],clientes: [],ingresos: [],flujo: [], almacen: [], sistemas: [], soporte: [], vehiculos: [], recursos: [], autorizacion: [], analisis: []                       
+                      ajustes: [], compras: [],proyectos: [],clientes: [],ingresos: [],flujo: [], almacen: [], sistemas: [], soporte: [], vehiculos: [], recursos: [], autorizacion: [], analisis: []                       
                    }
                 },
                 submitted: false,
@@ -214,10 +223,17 @@
                     return; 
                 }  
 
-                var modulos       = {1:"Compras", 2: "Proyectos", 3: "Clientes", 4:"Ingresos", 5: "Flujo", 6:"Almacen", 7:"Sistemas", 8:"Soporte",9:"Vehiculos",10:'Recursos', 11:"Autorizacion",12:"Analisis"}
-                var jsonProyect   = {}; var jsonCompras = {}; var jsonClient = {}; var jsonIngreso = {}; var jsonFlujo = {}; var jsonAlmacen = {}; var jsonSistem = {}; var jsonSoport = {}; var jsonVehiculo = {}; var jsonRecursos = {}; var jsonAutorizacion = {}; var jsonAnalisis = {};
+                var modulos       = {0: "Ajustes", 1:"Compras", 2: "Proyectos", 3: "Clientes", 4:"Ingresos", 5: "Flujo", 6:"Almacen", 7:"Sistemas", 8:"Soporte",9:"Vehiculos",10:'Recursos', 11:"Autorizacion",12:"Analisis"}
+                var jsonProyect   = {}; var jsonAjustes= {}; var jsonCompras = {}; var jsonClient = {}; var jsonIngreso = {}; var jsonFlujo = {}; var jsonAlmacen = {}; var jsonSistem = {}; var jsonSoport = {}; var jsonVehiculo = {}; var jsonRecursos = {}; var jsonAutorizacion = {}; var jsonAnalisis = {};
                 var listapermisos = [];
-            
+                
+                for(var aju=1; aju < this.roles.permisos.ajustes.length; aju++){
+                    if(this.roles.permisos.ajustes[0]){
+                        jsonAjustes["name_mod"] = modulos[0];
+                    }
+                    jsonAjustes[this.roles.permisos.ajustes[aju]] = true;
+                }
+
                 for(var o=1; o < this.roles.permisos.compras.length; o++){
                     if(this.roles.permisos.compras[0]){
                         jsonCompras["name_mod"] = modulos[1];
@@ -258,7 +274,7 @@
                     if(this.roles.permisos.almacen[0]){
                          jsonAlmacen["name_mod"] = modulos[6];
                     }
-                   jsonAlmacen[this.roles.permisos.almacen[p]] = true;
+                   jsonAlmacen[this.roles.permisos.almacen[al]] = true;
                 }
 
                 for(var sis=1; sis < this.roles.permisos.sistemas.length; sis++){
@@ -305,9 +321,9 @@
                 
                
                
-               listapermisos = [].concat(jsonCompras, jsonProyect, jsonClient, jsonIngreso, jsonFlujo, jsonAlmacen, jsonSistem, jsonSoport, jsonVehiculo, jsonRecursos, jsonAutorizacion, jsonAnalisis);
+               listapermisos = [].concat(jsonAjustes,jsonCompras, jsonProyect, jsonClient, jsonIngreso, jsonFlujo, jsonAlmacen, jsonSistem, jsonSoport, jsonVehiculo, jsonRecursos, jsonAutorizacion, jsonAnalisis);
                var obj_permisos   = [];
-
+                //console.log('Lista permisos',listapermisos);
                for(var w = 0; w < listapermisos.length; w++){
                    if(Object.keys(listapermisos[w]).length != 0){
                         obj_permisos = obj_permisos.concat(listapermisos[w]);

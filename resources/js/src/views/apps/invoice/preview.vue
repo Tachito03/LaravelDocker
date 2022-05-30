@@ -39,7 +39,7 @@
                                                         </div>
 
                                                         <div class="col-sm-6 align-self-center mt-3">
-                                                            <p class="inv-street-addr">XYZ Delta Street</p>
+                                                            <p class="inv-street-addr">Prueba Delta Street</p>
                                                             <p class="inv-email-address">info@company.com</p>
                                                             <p class="inv-email-address">(120) 456 789</p>
                                                         </div>

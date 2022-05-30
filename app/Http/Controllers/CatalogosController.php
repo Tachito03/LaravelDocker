@@ -56,4 +56,26 @@ class CatalogosController extends Controller
         $rol = Rol::find($id);
         return response()->json(['rol' => $rol], 200);
     }
+
+    public function FormatoPdf(){
+       // $almacen = DB::table('reporte_solicitud_almacen')->get();
+
+        $formato = \PDF::loadView('formatosPDF.orden-compra');
+        $formato->setPaper('a4' , 'portrait');
+        return $formato->output();
+        /*$formato = \PDF::loadView('formatosPDF.solicitud-epp');
+        $formato->setPaper('a4' , 'portrait');
+        return $formato->output();*/
+        /*$formato = \PDF::loadView('formatosPDF.solicitud-consumibles');
+        $formato->setPaper('a4' , 'portrait');
+        return $formato->output();*/
+
+       /* $formato = \PDF::loadView('formatosPDF.reporte-equipo-almacen');
+        $formato->setPaper('a4' , 'portrait');
+        return $formato->output();*/
+
+       /* $formato = \PDF::loadView('formatosPDF.solicitud-materiales');
+        $formato->setPaper('a4' , 'landscape');
+        return $formato->output();*/
+    }
 }

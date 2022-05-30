@@ -1,7 +1,6 @@
 <template>
     <!-- Modal Register-->
-    <div class="modal-overlay">
-        <b-modal hide-footer  ref="modalAlta" title="Nuevo usuario" size="lg" class="modal " v-if="showModal">
+        <b-modal hide-footer v-if="showModal" title="Nuevo usuario" size="lg" class="modal">
         
             <form class="mt-0" ref="formadd" @submit.prevent="addUser">
                 <b-form-row class="col-12">
@@ -66,7 +65,6 @@
                 </b-form-row>
             </form>
         </b-modal>
-    </div>
 </template>
 <script>
     import axios from 'axios';
@@ -76,7 +74,7 @@
 
     export default {
         metaInfo: { title: 'Bootstrap Multiple Tables' },
-        name: 'AddUserModal',
+        name: 'Modal',
         data() {
             return {
                 usuarioadd: { nombre: '', apellidos: '', correo: '', contrasena: '', contrasena_conf: '', id_rol: null },

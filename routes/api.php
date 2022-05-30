@@ -3,6 +3,7 @@
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CatalogosController;
 use App\Http\Controllers\GestionusuarioController;
+use App\Http\Controllers\ReportesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,11 @@ Route::group(['prefix' => 'catalogs', 'middleware' => 'auth:sanctum'], function(
     Route::post('/add/rol', [CatalogosController::class, 'saveRol']);
     Route::get('/edit/rol/{id}', [CatalogosController::class, 'getRol']);
     Route::post('/update/rol/{id}', [CatalogosController::class, 'updateRol']);
+});
+
+Route::group(['prefix' => 'reportes', 'middleware' => 'auth:sanctum'], function(){
+    Route::get('/solicitud/equipoalmacen', [ReportesController::class, 'reporteSolicitudMaterial']);
+    Route::get('/solicitud/epp', [ReportesController::class, 'reporteSolicitudEpp']);
+    Route::get('/solicitud/consumible', [ReportesController::class, 'reporteSolicitudConsumible']);
+    Route::get('/solicitud/extravio', [ReportesController::class, 'reporteRoboDanio']);
 });

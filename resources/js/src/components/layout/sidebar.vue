@@ -6,7 +6,7 @@
 
             <perfect-scrollbar class="list-unstyled menu-categories" tag="ul" :options="{ wheelSpeed: 0.5, swipeEasing: !0, minScrollbarLength: 40, maxScrollbarLength: 300, suppressScrollX: true }">
                 <!--Empieza Ajustes Sistema-->
-                <li class="menu" v-for="(opcion, i) in usuarioPuede" :key="i" v-if="opcion.nombre_modulo == 'ajustes' && opcion.lista">
+                <li class="menu" v-for="(opcion, i) in usuarioPuede" :key="i" v-if="opcion.name_mod == 'Ajustes'">
                     <a href="#ajustes" v-b-toggle class="dropdown-toggle" @click.prevent>
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
@@ -31,7 +31,7 @@
                     </a>
                     <b-collapse id="ajustes" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link v-if="opcion.nombre_modulo == 'ajustes' && opcion.lista"  tag="li" to="/ajustes/gestion/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
+                            <router-link v-if="opcion.name_mod == 'Ajustes'"  tag="li" to="/ajustes/gestion/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
                             <router-link tag="li" to="/ajustes/historial/accesos" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
                             <router-link tag="li" to="/ajustes/historial/modificaciones" @click.native="toggleMobileMenu"><a>Historial de Modificaciones</a></router-link>
@@ -68,7 +68,7 @@
                 <!-- Termina Modulo Ajustes-->
                 
                 <!--Modulo de compras-->
-                <li class="menu" v-for="(opcion, i) in usuarioPuede" :key="i" v-if="opcion.nombre_modulo == 'compras' && opcion.ver">
+                <li class="menu" v-for="(opcion, i) in usuarioPuede" :key="i" v-if="opcion.name_mod == 'Compras'">
                     <a href="#compras" v-b-toggle class="dropdown-toggle" @click.prevent>
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
@@ -93,7 +93,7 @@
                     </a>
                     <b-collapse id="compras" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link v-if="opcion.nombre_modulo == 'compras' && opcion.reporte"  tag="li" to="/general/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
+                            <router-link tag="li" to="/general/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
@@ -102,7 +102,7 @@
                 </li>
                 <!-- Termina Compras-->
                 <!--Modulo de proyectos-->
-                <li class="menu" v-for="(opcion, i) in usuarioPuede" :key="i" v-if="opcion.nombre_modulo == 'proyectos' && opcion.ver">
+                <li class="menu" v-for="(opcion, i) in usuarioPuede" :key="i" v-if="opcion.name_mod == 'Proyectos'">
                     <a href="#proyectos" v-b-toggle class="dropdown-toggle" @click.prevent>
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder-plus"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
@@ -127,7 +127,7 @@
                     </a>
                     <b-collapse id="proyectos" accordion="menu">
                         <ul class="collapse submenu list-unstyled show">
-                            <router-link v-if="opcion.nombre_modulo == 'proyectos' && opcion.reporte"  tag="li" to="/config/security" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
+                            <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Catálogos Generales</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
@@ -649,7 +649,7 @@
                     selector.click();
                 }
             }
-            this.usuarioPuede = JSON.parse(this.permisos);
+            this.usuarioPuede = JSON.parse(this.permisos)
             //console.log('Log:', this.usuarioPuede)
         },
 

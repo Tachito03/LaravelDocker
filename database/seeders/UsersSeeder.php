@@ -22,12 +22,12 @@ class UsersSeeder extends Seeder
             'apellidos' => 'Root',
             'foto' => 'root.png',
             'correo' => 'root@cyp.com',
-            'contrasena' => Hash::make('12345'),
+            'contrasena' => Hash::make('admin123'),
             'inactivo' => '0',
-            'id_rol' => '1' 
+            'id_rol' => '13' 
          ]);
          
-         DB::table('users')->insert([    
+        /* DB::table('users')->insert([    
             'nombre' => 'Admin', 
             'apellidos' => 'Admin',
             'foto' => 'admin.png',
@@ -45,7 +45,7 @@ class UsersSeeder extends Seeder
             'contrasena' => Hash::make('12345'),
             'inactivo' => '0',
             'id_rol' => '3' 
-         ]);
+         ]);*/
 
     }
 }

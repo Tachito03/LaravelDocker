@@ -83,7 +83,7 @@
                         </b-table>
 
                         <div class="table-footer">
-                            <div class="dataTables_info">Mostrando {{ meta.total_items ? meta.start_index + 1 : 0 }} to {{ meta.end_index + 1 }} of {{ meta.total_items }}</div>
+                            <div class="dataTables_info">Mostrando {{ meta.total_items ? meta.start_index + 1 : 0 }} a {{ meta.end_index + 1 }} de {{ meta.total_items }}</div>
                             <div class="paginating-container pagination-solid flex-column align-items-right">
                                 <b-pagination
                                     v-model="table_option.current_page"
@@ -134,10 +134,11 @@
     import axios from 'axios';
 
     export default {
-        metaInfo: { title: 'Bootstrap Multiple Tables' },
+        metaInfo: { title: 'Roles y permisos' },
         data() {
             return {
                 items: [],
+                roles: [],
                 columns: [],
                 table_option: { total_rows: 0, current_page: 1, page_size: 10, search_text: '' },
                 meta: {}
@@ -158,15 +159,43 @@
             ObtieneRoles() {
                 this.columns = [
                     { key: 'id', label: 'No', sortable: false },
-                    { key: 'descripcion', label: 'Nombre del rol', sortable: false },
-                    //{ key: 'permisos', label: 'Permisos', sortable: false },
+                    { key: 'descripcion', label: 'Descripción', sortable: false },
+                    { key: 'modulos', label: 'Módulo (s) de control', sortable: false },
                     { key: 'created_at', label: 'Fecha creación', sortable: false },
+                    { key: 'updated_at', label: 'Fecha modificación', sortable: false },
                     { key: 'action', label: 'Acciones', sortable: false },
                 ];
                 
                  axios.get('/api/catalogs/roles').then((response) =>{
-                    this.items = response.data.roles;
-                     this.table_option.total_rows = this.items.length;
+                    this.roles = response.data.roles;
+                    //console.log('roles bd', this.roles);
+                    var extract_mod = [];
+                    let data_rol = [];
+                    var modulos = [];
+                    var lista_roles = {};
+
+                    for(var x=0; x < this.roles.length; x++ ){
+                        for(var y = 0; y < this.roles[x].permisos.length; y++){
+                           extract_mod[x] = extract_mod[x] + ', ' + this.roles[x].permisos[y].name_mod;
+                        }
+                    }
+
+                    for(var i=0; i < extract_mod.length; i++){
+                        modulos[i] = extract_mod[i].replace('undefined,', '');
+                    }
+
+                    for(var w=0; w < modulos.length; w++){
+                        data_rol[w] = [];
+                        data_rol[w]['id'] = this.roles[w].id;
+                        data_rol[w]['descripcion'] = this.roles[w].descripcion;
+                        data_rol[w]['created_at'] = this.roles[w].created_at;
+                        data_rol[w]['updated_at'] = this.roles[w].updated_at;
+                        data_rol[w]['modulos'] = modulos[w];  
+                    }
+
+                    this.items = data_rol;
+
+                    this.table_option.total_rows = this.items.length;
                 });
                 this.get_meta();
             },

@@ -127,7 +127,7 @@
     import axios from 'axios';
 
     export default {
-        metaInfo: { title: 'Historial de Accesos' },
+        metaInfo: { title: 'Historial de accesos' },
         data() {
             return {
                 //table 1

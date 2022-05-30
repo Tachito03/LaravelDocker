@@ -13,10 +13,37 @@ class GestionusuarioController extends Controller
 
     public function addUser(Request $request){
 
+        $reglas = [
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'correo' => 'required|email|unique:users,correo',
+            'contrasena' => 'required|min:8|max:15',
+            'contrasena_conf' => 'required|same:contrasena',
+            'id_rol' => 'required'
+        ];
+
+        $mensajes = [
+            'nombre.required' => 'El campo nombre es requerido',
+            'apellidos.required' => 'El campo apellido es requerido',
+            'correo.required' => 'El campo correo electrónico es requerido',
+            'correo.email' => 'El campo correo electrónico tiene un formato incorrecto',
+            'correo.unique' => 'Este correo electrónico ya existe, intente con otro',
+            'contrasena.min' => 'La contraseña debe contener al menos 8 carácteres',
+            'contrasena_conf.required' => 'Es necesario confirmar la contraseña',
+            'contrasena_conf.min' => 'La contraseña debe contener al menos 8 carácteres',
+            'contrasena_conf.same' => 'Las contraseñas no coinciden'
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails()){
+            return response()->json(['errors' => $validator->errors()], 401);
+        }
+
         $user = new user();
         $user->nombre = $request->input('nombre');
         $user->apellidos = $request->input('apellidos');
-        $user->foto = 'general.jpg';
+        $user->foto = 'thumb.jpg';
         $user->correo = $request->input('correo');
         $user->contrasena = Hash::make($request->input('contrasena'));
         $user->inactivo = '0';
@@ -25,21 +52,45 @@ class GestionusuarioController extends Controller
         $user->save();
 
         if($user){
-            $usuario_init = session('usuario');
             $tabla = 'Usuarios';
             $modulo = 'Ajustes/gestion usuarios';
             $accion = 'Alta usuario';
 
-            \HistorialCambios::Logcambios($tabla,$modulo,$accion,$usuario_init, $user->id);
-            return response()->json(['msg' => 'OK'], 200);
+            \HistorialCambios::Logcambios($tabla,$modulo,$accion, $user->id);
+            return response()->json(['message' => 'OK'], 200);
         }else{
-            return response()->json(['msg' => 'Error'], 501);
+            return response()->json(['message' => 'Error'], 501);
         }
 
-        //return response()->json(['msg' => $message]);
     }
 
     public function updateUser(Request $request, $id){
+
+        $reglas = [
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'correo' => 'required|email',
+            'contrasena' => 'required|min:8|max:15',
+            'contrasena_conf' => 'required|same:contrasena',
+            'id_rol' => 'required'
+        ];
+
+        $mensajes = [
+            'nombre.required' => 'El campo nombre es requerido',
+            'apellidos.required' => 'El campo apellido es requerido',
+            'correo.required' => 'El campo correo electrónico es requerido',
+            'correo.email' => 'El campo correo electrónico tiene un formato incorrecto',
+            'contrasena.min' => 'La contraseña debe contener al menos 8 carácteres',
+            'contrasena_conf.required' => 'Es necesario confirmar la contraseña',
+            'contrasena_conf.min' => 'La contraseña debe contener al menos 8 carácteres',
+            'contrasena_conf.same' => 'Las contraseñas no coinciden'
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails()){
+            return response()->json(['errors' => $validator->errors()], 401);
+        }
 
         $user = User::find($id);
         $user->nombre = $request->input('nombre');
@@ -53,15 +104,14 @@ class GestionusuarioController extends Controller
         $user->update();
 
         if($user){
-            //$usuario_init = session('usuario');
             $tabla = 'usuarios';
             $modulo = 'Ajustes/gestion usuarios';
             $accion = 'Actualizacion';
 
-            \HistorialCambios::Logcambios($tabla,$modulo,$accion, $user->id);
-            return response()->json(['msg' => 'OK'], 200);
+            \HistorialCambios::Logcambios($tabla,$modulo,$accion,$user->id);
+            return response()->json(['message' => 'OK'], 200);
         }else{
-            return response()->json(['msg' => 'Error'], 501);
+            return response()->json(['message' => 'Error'], 501);
         }
     }
 
@@ -82,14 +132,20 @@ class GestionusuarioController extends Controller
     }
 
     public function deleteUser($id){
-        User::where('id', $id)
+       $user = User::where('id', $id)
         ->update([
                     'inactivo' => '1'
                 ]);
+
+        if($user){
+            $tabla = 'usuarios';
+            $modulo = 'Ajustes/gestion usuarios';
+            $accion = 'Baja usuario';
         
-        $tabla = 'Usuarios';
-        $modulo = 'Ajustes/gestion usuarios';
-        $accion = 'Baja usuario';
-        \HistorialCambios::Logcambios($tabla,$modulo,$accion, $id);
+            \HistorialCambios::Logcambios($tabla,$modulo,$accion,$id);
+                return response()->json(['message' => 'OK'], 200);
+        }else{
+            return response()->json(['message' => 'Error'], 501);
+        }
     }
 }

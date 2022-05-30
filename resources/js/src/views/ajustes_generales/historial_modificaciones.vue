@@ -76,7 +76,7 @@
                         </b-table>
 
                         <div class="table-footer">
-                            <div class="dataTables_info">Mostrando {{ meta.total_items ? meta.start_index + 1 : 0 }} to {{ meta.end_index + 1 }} of {{ meta.total_items }}</div>
+                            <div class="dataTables_info">Mostrando {{ meta.total_items ? meta.start_index + 1 : 0 }} a {{ meta.end_index + 1 }} de {{ meta.total_items }}</div>
                             <div class="paginating-container pagination-solid flex-column align-items-right">
                                 <b-pagination
                                     v-model="table_option.current_page"
@@ -155,6 +155,7 @@
                     { key: 'responsable', label: 'Responsable', sortable: false },
                     { key: 'modulo', label: 'Módulo', sortable: false },
                     { key: 'accion', label: 'Acción', sortable: false },
+                    { key: 'id_usuario', label: 'ID Modificado', sortable: false },
                     { key: 'tabla', label: 'Tabla', sortable: false },
                     { key: 'fecha', label: 'Fecha modificación', sortable: false }
                 ];
