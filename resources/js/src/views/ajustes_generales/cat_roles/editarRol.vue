@@ -357,7 +357,7 @@
               for(var w = 0; w < listapermisos.length; w++){
                    if(Object.keys(listapermisos[w]).length != 0){
                         if(listapermisos[w].crear === true || listapermisos[w].eliminar === true  || listapermisos[w].reportes === true || listapermisos[w].actualizar === true || listapermisos[w].submenus === true){
-                            console.log('Objeto no falso ', w);
+                            //console.log('Objeto no falso ', w);
                             obj_permisos = obj_permisos.concat(listapermisos[w]);
                         }
                    }
@@ -381,12 +381,8 @@
                             });
                         }
                 }).catch((errors) => {
-                    this.$swal({
-                        icon: 'error',
-                        title: 'Opss, hay errores en el formulario!',
-                        text: 'Intente de nuevo!',
-                        padding: '2em'
-                    });
+                    console.log(errors)
+                    //this.errors = errors.
                 })
             }, 
         }

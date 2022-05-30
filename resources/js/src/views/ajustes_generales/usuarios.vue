@@ -394,21 +394,7 @@
                 };
             },
              async btnNuevo() {
-                 //alert()
-                //this.$refs["AddModal"].show();
-               // await axios.get('/sanctum/csrf-cookie');
-                await axios.get('/api/reportes/solicitud/equipoalmacen', {responseType: 'blob'}).then(response => {
-                    
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'solicitud.pdf'); 
-                    document.body.appendChild(link);
-                    link.click();
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+                this.$refs["AddModal"].show();
             },
             async btnEdit(item) {
                 this.$refs["modalEdita"].show();

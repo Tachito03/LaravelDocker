@@ -1,7 +1,7 @@
 <template>
     <div class="form full-form auth-cover">
         <div class="form-container">
-            <div class="form-form">
+            <div class="form-form" style="width: 100%!important">
                 <div class="form-form-wrap">
                     <div class="form-container">
                         <div class="form-content">
@@ -69,7 +69,7 @@
                                             <div class="field-wrapper toggle-pass d-flex align-items-center">
                                             </div>
                                             <div class="field-wrapper">
-                                                <b-button type="submit" variant="primary">Entrar</b-button>
+                                                <b-button type="submit" variant="primary" block>Entrar</b-button>
                                             </div>
                                         </div>
                                         <div class="field-wrapper">
@@ -85,9 +85,9 @@
                     </div>
                 </div>
             </div>
-            <div class="form-image">
+            <!--<div class="form-image">
                 <div class="l-image"></div>
-            </div>
+            </div>-->
         </div>
     </div>
 </template>

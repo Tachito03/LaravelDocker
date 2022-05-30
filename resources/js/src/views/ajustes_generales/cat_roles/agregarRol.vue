@@ -48,6 +48,7 @@
                                         <b-form-row class="col-12">
                                             <b-form-group class="col-12">
                                                 <p class="mb-4">Seleccione los permisos para este rol</p>
+                                                 <p class="text-danger" v-if="error.permisos"><strong>{{ error.permisos[0] }}</strong></p>
                                             </b-form-group>
                                         </b-form-row>
                                         <b-form-row class="col-12">
@@ -198,6 +199,7 @@
                       ajustes: [], compras: [],proyectos: [],clientes: [],ingresos: [],flujo: [], almacen: [], sistemas: [], soporte: [], vehiculos: [], recursos: [], autorizacion: [], analisis: []                       
                    }
                 },
+                error: [],
                 submitted: false,
             }
         },
@@ -347,12 +349,18 @@
                             });
                         }
                 }).catch((errors) => {
-                     this.$swal({
+                     console.log(errors);
+                     //console.log('code', errors.response.status)
+                     if(errors.response.status === 401){
+                         this.error = errors.response.data.error;
+                         console.log(this.error)
+                     }
+                     /*this.$swal({
                         icon: 'error',
                         title: 'Opss, hay errores en el formulario!',
                         text: 'Intente de nuevo!',
                         padding: '2em'
-                    });
+                    });*/
                 })
             }, 
         }

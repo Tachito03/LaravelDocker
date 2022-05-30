@@ -10,10 +10,17 @@ use App\Models\Rol;
 class CatalogosController extends Controller
 {
     public function saveRol(Request $request){
-        $validator = Validator::make($request->all(),[
+        $reglas = [
             'descripcion' => 'required',
             'permisos' => 'required'
-        ]);
+        ];
+
+        $mensajes = [
+            'descripcion.required' => 'La descripción es necesario',
+            'permisos.required' => 'Selecciona los privilegios para este rol'
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if($validator->fails()){
             return response()->json(['error' => $validator->errors()], 401);
@@ -29,13 +36,20 @@ class CatalogosController extends Controller
     }
 
     public function updateRol(Request $request, $id){
-        $validator = Validator::make($request->all(),[
+        $reglas = [
             'descripcion' => 'required',
             'permisos' => 'required'
-        ]);
+        ];
+
+        $mensajes = [
+            'descripcion.required' => 'La descripción es necesario',
+            'permisos.required' => 'Selecciona los privilegios para este rol'
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if($validator->fails()){
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['errors' => $validator->errors()], 401);
         }
 
         $rol = Rol::find($id);
