@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="field-wrapper">
-                                        <router-link to="/auth/pass-recovery" class="forgot-pass-link">Forgot Password?</router-link>
+                                        <router-link to="/auth/pass-recovery" class="forgot-pass-link">Olvide mi contraseña?</router-link>
                                     </div>
                                 </div>
                             </b-form>
