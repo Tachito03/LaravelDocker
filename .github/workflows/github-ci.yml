@@ -147,6 +147,6 @@ jobs:
          USERNAME: ${{ secrets.SSH_USERNAME }}         
        with: 
          source: "."
-         target: "/var/www/html"
+         target: "/var/www/html/gpodev.live"
          strip_components: 1
         
