@@ -54,7 +54,7 @@
                                             <b-checkbox switch class="switch s-primary"></b-checkbox>
                                         </div>
                                         <div class="field-wrapper">
-                                            <b-button type="submit" variant="primary">Log In</b-button>
+                                            <b-button type="submit" variant="primary">Entrar</b-button>
                                         </div>
                                     </div>
 
