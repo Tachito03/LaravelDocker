@@ -18,13 +18,13 @@ class UsersSeeder extends Seeder
     {
         //
         DB::table('users')->insert([    
-            'nombre' => 'Root', 
-            'apellidos' => 'Root',
-            'foto' => 'root.png',
-            'correo' => 'root@cyp.com',
+            'nombre' => 'Eustacio', 
+            'apellidos' => 'Bautista',
+            'foto' => 'thumb.png',
+            'correo' => 'admin.dev@cyp.com',
             'contrasena' => Hash::make('admin123'),
             'inactivo' => '0',
-            'id_rol' => '13' 
+            'id_rol' => '1' 
          ]);
          
         /* DB::table('users')->insert([    
