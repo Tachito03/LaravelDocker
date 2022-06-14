@@ -232,7 +232,6 @@
                                 <b-form-group class="col-md-6" label="Nueva contraseña: ">
                                     <b-input type="password" placeholder="Nueva Contraseña" v-model="usuarioedit.contrasena" :class="{ 'is-invalid': update && $v.usuarioedit.contrasena.$error }"></b-input>
                                     <div v-if="update && $v.usuarioedit.contrasena.$error" class="invalid-feedback">
-                                        <span class="text-danger" v-if="!$v.usuarioedit.contrasena.required">La contraseña es obligatoria</span>
                                         <span class="text-danger" v-if="!$v.usuarioedit.contrasena.minLength">Debe tener al menos 8 caracteres</span>
                                     </div>
                                     <span class="text-danger" v-if="errors_up.contrasena">{{ errors_up.contrasena[0] }}</span>
@@ -240,7 +239,6 @@
                                  <b-form-group class="col-md-6" label="Confirmar contraseña: ">
                                     <b-input type="password" placeholder="Confirma tu contraseña" v-model="usuarioedit.contrasena_conf" :class="{ 'is-invalid': update && $v.usuarioedit.contrasena_conf.$error }"></b-input>
                                     <div v-if="update && $v.usuarioedit.contrasena_conf.$error" class="invalid-feedback">
-                                        <span class="text-danger" v-if="!$v.usuarioedit.contrasena_conf.required">Es necesario confirmar la contraseña</span>
                                         <span class="text-danger" v-if="!$v.usuarioedit.contrasena_conf.minLength">Debe tener al menos 8 caracteres</span>
                                         <span class="text-danger" v-if="!$v.usuarioedit.contrasena_conf && !$v.usuarioedit.contrasena_conf.sameAsPassword">Las contraseñas no coinciden</span>
                                     </div>
@@ -310,8 +308,8 @@
                 nombre: {required},
                 apellidos: {required},
                 correo: {required, email},
-                contrasena: { required, minLength: minLength(8)},
-                contrasena_conf: {required, sameAsPassword: sameAs('contrasena')},
+                contrasena: {minLength: minLength(8)},
+                contrasena_conf: {sameAsPassword: sameAs('contrasena')},
                 id_rol: {required}
             },
         },

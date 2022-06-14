@@ -71,8 +71,8 @@ class GestionusuarioController extends Controller
             'nombre' => 'required',
             'apellidos' => 'required',
             'correo' => 'required|email',
-            'contrasena' => 'required|min:8|max:15',
-            'contrasena_conf' => 'required|same:contrasena',
+            'contrasena' => 'min:8|max:15',
+            'contrasena_conf' => 'same:contrasena',
             'id_rol' => 'required'
         ];
 
@@ -82,7 +82,6 @@ class GestionusuarioController extends Controller
             'correo.required' => 'El campo correo electrónico es requerido',
             'correo.email' => 'El campo correo electrónico tiene un formato incorrecto',
             'contrasena.min' => 'La contraseña debe contener al menos 8 carácteres',
-            'contrasena_conf.required' => 'Es necesario confirmar la contraseña',
             'contrasena_conf.min' => 'La contraseña debe contener al menos 8 carácteres',
             'contrasena_conf.same' => 'Las contraseñas no coinciden'
         ];
@@ -98,7 +97,11 @@ class GestionusuarioController extends Controller
         $user->apellidos = $request->input('apellidos');
         $user->foto = 'general.jpg';
         $user->correo = $request->input('correo');
-        $user->contrasena = Hash::make($request->input('contrasena'));
+        
+            if(!empty($request->input('contrasena'))){
+                $user->contrasena = Hash::make($request->input('contrasena'));
+            }
+        
         $user->inactivo = '0';
         $user->id_rol = $request->input('id_rol');
         $user->updated_at = date('Y-m-d H:i:s');
