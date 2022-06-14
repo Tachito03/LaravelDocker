@@ -135,6 +135,23 @@ class UsuariosController extends Controller
     }
 
     public function updateIntentoSesion($id, Request $request){
+
+        $reglas = [
+            'intentos' => 'required',
+            'tiempomax' => 'required'
+        ];
+
+        $mensajes = [
+            'intentos.required' => 'El campo intentos es requerido',
+            'tiempomax.required' => 'El campo tiempo máximo es requerido',
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails()){
+            return response()->json(['errors' => $validator->errors()], 401);
+        }
+        
         $updateIntento = IntentoSesion::find($id);
         $updateIntento->intentos = $request->intentos;
         $updateIntento->tiempomax = $request->tiempomax;
