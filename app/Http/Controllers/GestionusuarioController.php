@@ -47,6 +47,7 @@ class GestionusuarioController extends Controller
         $user->correo = $request->input('correo');
         $user->contrasena = Hash::make($request->input('contrasena'));
         $user->inactivo = '0';
+        $user->bloqueado = '0';
         $user->id_rol = $request->input('id_rol');
         $user->created_at = date('Y-m-d H:i:s');
         $user->save();

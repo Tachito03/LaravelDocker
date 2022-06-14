@@ -23,12 +23,24 @@ const routes = [
         name: 'dashboard',
         meta: { authRequired: true }
     },
+    {
+        path: '/auth/pass-recovery',
+        name: 'pass-recovery',
+        component: () => import(/* webpackChunkName: "auth-pass-recovery" */ '../views/auth/pass_recovery.vue'),
+        meta: { authRequired: false}
+    },
 
     //Ajustes generales del sistema
     {
         path: '/ajustes/gestion/usuarios',
         name: 'usuarios',
         component: () => import(/* webpackChunkName: "components-users" */ '../views/ajustes_generales/usuarios.vue'),
+        meta: { authRequired: true }
+    },
+    {
+        path: '/ajustes/usuarios/bloqueados',
+        name: 'usuarios',
+        component: () => import(/* webpackChunkName: "components-users" */ '../views/ajustes_generales/usuarios_bloqueados.vue'),
         meta: { authRequired: true }
     },
     {
@@ -118,13 +130,6 @@ const routes = [
         path: '/pages/sample',
         name: 'sample',
         component: () => import(/* webpackChunkName: "pages-sample" */ '../views/pages/sample.vue')
-    },
-
-    {
-        path: '/auth/pass-recovery',
-        name: 'pass-recovery',
-        component: () => import(/* webpackChunkName: "auth-pass-recovery" */ '../views/auth/pass_recovery.vue'),
-      
     },
 
     //elements

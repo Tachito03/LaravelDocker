@@ -988,6 +988,9 @@
                     this.$router.push({name: 'login'});
                 }).catch((errors) => {
                     console.log(errors);
+                    if(errors.response.status === 401){
+                        this.$router.push({name: 'login'});
+                    }
                 });
             }
         }

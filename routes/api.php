@@ -30,6 +30,10 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth:sanctum'], function(){
     Route::get('/roles', [GestionusuarioController::class, 'getAllRols']);
     Route::get('/lista', [GestionusuarioController::class, 'getUsers']); //for datatable
     Route::get('/accesos', [UsuariosController::class, 'HistorialAccesos']);
+    Route::get('/blocked', [UsuariosController::class, 'usuariosBloqueados']);
+    Route::get('/intentos', [UsuariosController::class, 'intentosSesion']);
+    Route::post('/intentos/update/{id}', [UsuariosController::class, 'updateIntentoSesion']);
+    Route::post('/activate/{id}', [UsuariosController::class, 'activateUsuario']);
     Route::get('/historial', [UsuariosController::class, 'HistorialModificaciones']);
     Route::post('/add', [GestionusuarioController::class, 'addUser']);
     Route::get('/edit/{id}', [GestionusuarioController::class, 'editUser']);

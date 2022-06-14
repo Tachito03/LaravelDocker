@@ -7,7 +7,7 @@ window._ = require('lodash');
  */
 
 import axios from 'axios';
-//axios.defaults.baseURL = 'http://dev.gpodev.live';
+axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.post['Content-Type'] ='application/json';
 axios.defaults.headers.post['Accept'] ='application/json';

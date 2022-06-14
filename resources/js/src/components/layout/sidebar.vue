@@ -34,6 +34,7 @@
                             <router-link v-if="opcion.name_mod == 'Ajustes'"  tag="li" to="/ajustes/gestion/usuarios" @click.native="toggleMobileMenu" ><a>Gestion Usuarios</a></router-link>
                             <router-link tag="li" to="/config/security" @click.native="toggleMobileMenu"><a>Reglas de Seguridad</a></router-link>
                             <router-link tag="li" to="/ajustes/historial/accesos" @click.native="toggleMobileMenu"><a>Registro de Acceso</a></router-link>
+                            <router-link tag="li" to="/ajustes/usuarios/bloqueados" @click.native="toggleMobileMenu"><a>Usuarios Bloqueados</a></router-link>
                             <router-link tag="li" to="/ajustes/historial/modificaciones" @click.native="toggleMobileMenu"><a>Historial de Modificaciones</a></router-link>
                             <li>
                                 <a href="#catalogs" v-b-toggle class="dropdown-toggle" @click.prevent>

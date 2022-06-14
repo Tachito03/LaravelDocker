@@ -24,7 +24,8 @@ class UsersSeeder extends Seeder
             'correo' => 'admin.dev@cyp.com',
             'contrasena' => Hash::make('admin123'),
             'inactivo' => '0',
-            'id_rol' => '1' 
+            'id_rol' => '1',
+            'created_at' => date('Y-m-d H:i:s')
          ]);
          
         /* DB::table('users')->insert([    
