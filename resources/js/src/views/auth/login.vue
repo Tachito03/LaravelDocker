@@ -5,12 +5,8 @@
                 <div class="form-form-wrap">
                     <div class="form-container">
                         <div class="form-content">
-                            <h1 class="text-center">
-                                <span class="brand-name">Bienvenido a CyP</span>
-                            </h1>
-                            <h4 class="text-center">
-                                <span class="brand-name">Iniciar sesión</span>
-                            </h4>
+                            <h3 class="text-center" style="color: #4361ee!important"><span class="brand-name">Bienvenido a Corrosión y Protección</span></h3>
+                            <h4 class="text-center"><span class="brand-name">Iniciar sesión</span></h4>
                             
                                 <b-form class="text-left" @submit.prevent="logInit">
                                     <div class="form">
@@ -65,15 +61,15 @@
                                         <div class="field-wrapper text-center">
                                             <h5 class="text-danger"><strong>{{ message }}</strong></h5>
                                         </div>
-                                        <div class="d-sm-flex justify-content-between">
+                                        <div class="justify-content-between">
                                             <div class="field-wrapper toggle-pass d-flex align-items-center">
                                             </div>
                                             <div class="field-wrapper">
-                                                <b-button type="submit" variant="primary" block>Entrar</b-button>
+                                                <b-button type="submit" block class="mb-4 mr-2" variant="primary">Entrar</b-button>
                                             </div>
                                         </div>
                                         <div class="field-wrapper">
-                                            <router-link to="/auth/pass-recovery" class="forgot-pass-link">¿Olvidaste tu contraseña?</router-link>
+                                            <router-link to="/reset/password" class="forgot-pass-link">¿Olvidaste tu contraseña?</router-link>
                                         </div>
                                     </div>
                                 </b-form>

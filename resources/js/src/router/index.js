@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Dashboard from '../views/dashboard.vue';
-import Inicio from '../views/auth/login.vue';
+import Restorepw from '../views/auth/pass_recovery.vue';
 import Login from '../views/auth/login.vue';
 import store from '../store';
 import axios from 'axios';
@@ -24,9 +24,9 @@ const routes = [
         meta: { authRequired: true }
     },
     {
-        path: '/auth/pass-recovery',
+        path: '/reset/password',
+        component: Restorepw,
         name: 'pass-recovery',
-        component: () => import(/* webpackChunkName: "auth-pass-recovery" */ '../views/auth/pass_recovery.vue'),
         meta: { authRequired: false}
     },
 
@@ -317,7 +317,7 @@ function loggedIn(){
 
 router.beforeEach((to, from, next) => {
      //un usuario autenticado no puede ver login de nuevo
-    if(to.path == '/'){
+    if(to.path == '/' || to.path == '/reset/password'){
         store.commit('setLayout', 'auth');
     }else{
         store.commit('setLayout', 'app');
