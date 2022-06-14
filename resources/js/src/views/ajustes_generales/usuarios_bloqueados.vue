@@ -127,14 +127,14 @@
                         <form class="mt-0" ref="formconfig" @submit.prevent="updateconfig">
                             <b-form-row class="col-12">
                                 <b-form-group class="col-md-6" label="Tiempo máximo para el número de intentos (en minutos):">
-                                    <b-input type="text" placeholder="Tiempo máximo en minutos" v-model="config.tiempomax" :class="{ 'is-invalid': submitted && $v.config.tiempomax.$error }"></b-input>
+                                    <b-input type="number" placeholder="Tiempo máximo en minutos" v-model="config.tiempomax" :class="{ 'is-invalid': submitted && $v.config.tiempomax.$error }"></b-input>
                                         <div v-if="submitted && $v.config.tiempomax.$error" class="invalid-feedback">
                                             <span class="text-danger" v-if="!$v.config.tiempomax.required">Este campo es requerido</span>
                                         </div>
                                         <span class="text-danger" v-if="errors.tiempomax">{{ errors.tiempomax[0] }}</span>
                                 </b-form-group>
                                 <b-form-group class="col-md-6" label="Número de intentos máximo antes de bloquear la cuenta: ">
-                                    <b-input type="text" placeholder="Número de intentos" v-model="config.intentos" :class="{ 'is-invalid': submitted && $v.config.intentos.$error }"></b-input>
+                                    <b-input type="number" placeholder="Número de intentos" v-model="config.intentos" :class="{ 'is-invalid': submitted && $v.config.intentos.$error }"></b-input>
                                         <div v-if="submitted && $v.config.intentos.$error" class="invalid-feedback">
                                             <span class="text-danger" v-if="!$v.config.intentos.required">Este campo es requerido </span>
                                         </div>

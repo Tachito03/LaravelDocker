@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            IntentoSessionSeeder::class,
             RolesSeeder::class,
             UsersSeeder::class,
             SolicitudEppSeeder::class,
