@@ -333,7 +333,8 @@
                }
 
                axios.post('/api/catalogs/add/rol/', {descripcion: this.roles.descripcion, permisos: obj_permisos}).then(response => {
-                        if(response.data.message === "success"){
+                       console.log(response);
+                       if(response.data.message === "success"){
                             this.$swal({
                                 icon: 'success',
                                 title: 'Se ha creado un nuevo rol!',
