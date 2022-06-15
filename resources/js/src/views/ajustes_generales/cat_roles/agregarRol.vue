@@ -332,7 +332,7 @@
                    }
                }
 
-               axios.post('/api/catalogs/add/rol/', {descripcion: this.roles.descripcion, permisos: obj_permisos}).then(response => {
+               axios.post('/api/catalogs/add/rol', {descripcion: this.roles.descripcion, permisos: obj_permisos}).then(response => {
                        console.log(response);
                        if(response.data.message === "success"){
                             this.$swal({
