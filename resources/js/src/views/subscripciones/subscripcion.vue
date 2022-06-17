@@ -6,8 +6,8 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Forms</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Validation</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:;">Pago</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Suscripción</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -80,6 +80,7 @@
                                         </div>
                                     </b-form-group>
                                 </b-form-row>
+
                                 <b-form-row>
                                     <b-form-group class="col-12" label="Número de tarjeta: ">
                                         <div id="card-element"></div>
@@ -95,9 +96,13 @@
                                         <b-alert show dismissible variant="light-warning" class="border-0 mb-4 text-center"> <strong>{{ errors }}</strong>  </b-alert>
                                     </b-form-group>
                                 </b-form-row>
-                                <b-button type="submit" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                                   @click="procesoPago" :disabled="procesandoPago" v-text="procesandoPago ? 'Procesando pago...' : 'Confirmar pago'">
-                                </b-button>
+                                <b-form-row>
+                                    <b-form-group class="col-12 text-right">
+                                        <b-button type="submit" class="btn-block mb-4 mr-2 flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                                            @click="procesoPago" :disabled="procesandoPago" v-text="procesandoPago ? 'Procesando pago...' : 'Confirmar pago'">
+                                        </b-button>
+                                    </b-form-group>
+                                </b-form-row>
                             </form>
                         </div>
                     </div>

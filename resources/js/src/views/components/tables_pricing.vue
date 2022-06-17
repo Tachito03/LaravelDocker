@@ -21,7 +21,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Toggle</h4>
+                                <h4>Planes de suscripciones</h4>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
     import axios from 'axios';
 
     export default {
-        metaInfo: { title: 'Pricing Tables' },
+        metaInfo: { title: 'Planes de suscripción' },
         components: {
             highlight
         },
