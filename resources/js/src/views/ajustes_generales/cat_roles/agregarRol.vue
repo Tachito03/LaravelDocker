@@ -338,7 +338,7 @@
                             this.$swal({
                                 icon: 'success',
                                 title: 'Se ha creado un nuevo rol!',
-                                text: "Dirígigete a la lista de roles para ver el agregado!",
+                                text: "Dirígete a la lista de roles para ver el agregado!",
                                 padding: '2em'
                             });
                         }else{

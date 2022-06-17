@@ -4,6 +4,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CatalogosController;
 use App\Http\Controllers\GestionusuarioController;
 use App\Http\Controllers\ReportesController;
+use App\Http\Controllers\SubscripcionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,4 +54,13 @@ Route::group(['prefix' => 'reportes', 'middleware' => 'auth:sanctum'], function(
     Route::get('/solicitud/epp', [ReportesController::class, 'reporteSolicitudEpp']);
     Route::get('/solicitud/consumible', [ReportesController::class, 'reporteSolicitudConsumible']);
     Route::get('/solicitud/extravio', [ReportesController::class, 'reporteRoboDanio']);
+});
+
+Route::group(['prefix' => 'suscription', 'middleware' => 'auth:sanctum'], function(){
+    Route::get('/plans', [SubscripcionController::class, 'index']);
+    Route::get('/usuario', [SubscripcionController::class, 'obtieneUsuario']);
+    Route::get('/obtienedetalle/{plan}', [SubscripcionController::class, 'mostrarPlan']);
+    Route::get('/check/{prod_id}/{name_prod}', [SubscripcionController::class, 'checkSubscribed']);
+    Route::post('/purchase', [SubscripcionController::class, 'procesoPago']);
+    
 });

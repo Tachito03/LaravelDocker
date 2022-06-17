@@ -295,6 +295,16 @@ const routes = [
         path: '/tables/export',
         name: 'export',
         component: () => import(/* webpackChunkName: "tables-export" */ '../views/tables/export.vue')
+    },
+    {
+        path: '/suscripciones/plan',
+        name: 'export',
+        component: () => import(/* webpackChunkName: "tables-export" */ '../views/components/tables_pricing.vue')
+    },
+    {
+        path: '/subscripcion/:plan',
+        name: 'subscripciones',
+        component: () => import(/* webpackChunkName: "tables-export" */ '../views/subscripciones/subscripcion.vue')
     }    
 ];
 

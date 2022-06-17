@@ -897,12 +897,12 @@ toast.fire({
                         position: 'top-end',
                         showConfirmButton: false,
                         timer: 3000,
-                        padding: '2em'
+                        padding: '1em'
                     });
                     toast.fire({
-                        icon: 'success',
+                        icon: 'error',
                         title: 'Signed in successfully',
-                        padding: '2em'
+                        padding: '1em'
                     });
                 }
             }

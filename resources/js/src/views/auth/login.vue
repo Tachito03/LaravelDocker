@@ -58,9 +58,6 @@
                                              <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
 
                                         </div>
-                                        <div class="field-wrapper text-center">
-                                            <h5 class="text-danger"><strong>{{ message }}</strong></h5>
-                                        </div>
                                         <div class="justify-content-between">
                                             <div class="field-wrapper toggle-pass d-flex align-items-center">
                                             </div>
@@ -87,11 +84,16 @@
         </div>
     </div>
 </template>
-
+<style>
+    .swal2-popup.swal2-toast{
+        padding: 0em !important;
+    }
+</style>
 <script>
     import '@/assets/sass/authentication/auth.scss';
     import axios from 'axios';
     import { required, email, minLength } from 'vuelidate/lib/validators';
+    import '@/assets/sass/components/custom-sweetalert.scss';
     
     export default {
         metaInfo: { title: 'Inicio de sesión' },
@@ -137,12 +139,18 @@
                         
                     }).catch((errors) =>{
                         console.log(errors);
-                        var v = this;
                         if(errors.response.status === 501) {
-                            v.message = errors.response.data.message;
-                            setTimeout(function () {
-                                v.message = '';
-                            }, 4000);
+         
+                            const toast = this.$swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 5000,
+                            });
+                            toast.fire({
+                                icon: 'error',
+                                title: errors.response.data.message,
+                            });
                         }else if(errors.response.status === 401){
                             this.errors = errors.response.data.errors;
                         }

@@ -51,14 +51,15 @@ class UsuariosController extends Controller
                         $this->bloquear_usuario($usuario->id);
                         return response()->json(['message' => 'Tu usuario se ha bloqueado, contáctate con el administrador para desbloquear'], 501);
                     }else if($minutos_actual > $attempts->tiempomax){
-                        Session::forget('default_intentos');
-                        Session::forget('fecha_inicio');
+                        session()->forget(['default_intentos', 'fecha_inicio']);
                     }
                 
                 return response()->json(['message' => 'Credenciales incorrectos'], 501);
                     
             }else{
                     session(['usuario' => $usuario->nombre]);
+                    session(['userid' => $usuario->id]);
+
                     $token = $usuario->createToken($request->email)->plainTextToken;
                     $roles = Rol::select('permisos')->join('users', 'users.id_rol', '=', 'roles.id')
                     ->where('users.id', $usuario->id)->get();
